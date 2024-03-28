@@ -1,0 +1,255 @@
+/* Djordje Vukovic */
+#home-body {
+    background-image: url('../resources/background_image1.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-color: rgba(0, 0, 0, 0.6);
+}
+
+#home-logged-body {
+    background-image: url('../resources/background_image1.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-color: rgba(0, 0, 0, 0.6);
+}
+
+#new-set-body {
+    background-image: url('../resources/background_image1.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-color: rgba(0, 0, 0, 0.6);
+}
+
+.navbar {
+    background-color: rgba(0, 0, 0, 0.5);
+    padding-left: 25%;
+    padding-right: 25%;
+    opacity: 1;
+}
+
+.navbar-brand {
+    color: #fff;
+    /* opacity: 1; */
+}
+
+.nav-item{
+    padding-left: 10px; 
+}
+
+#home-play-btn {
+    font-size: 100px;
+    font-weight: 800;
+    padding: 100px 100px;
+    margin-top: 30%; /* Adjust for vertical positioning */
+    border-radius: 30px;
+}
+
+#home-logged-new-word-set {
+    font-size: 50px;
+    font-weight: 700;
+    padding: 30px 30px;
+    margin-top: 5%; /* Adjust for vertical positioning */
+    border-radius: 30px;
+}
+
+#home-logged-play-btn{
+    font-size: 100px;
+    font-weight: 800;
+    padding: 100px 100px;
+    margin-top: 17%; /* Adjust for vertical positioning */
+    border-radius: 30px;
+}
+
+#new-set-form{
+    border-radius: 30px;
+    margin-top: 18%;
+    padding: 30px;
+    box-shadow: 0px 10px 5px black;
+}
+
+#admin-set-change{
+    height: 400px;
+    text-align: left;
+    font-size: x-large;
+}
+
+#admin-name-input{
+    font-size: 20px;
+    font-style: italic;
+}
+
+#admin-word-input{
+    font-size: 20px;
+}
+
+#admin-buttons{
+    text-align: right;
+    margin: 20px;
+}
+
+#admin-buttons>button{
+    margin-left: 10px;
+    font-size: large;
+}
+
+#admin-active-set{
+    font-size: large;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+#admin-active-set-display{
+    color:gold;
+}
+
+#admin-active-set-name{
+    font-style: italic;
+}
+
+#admin-list{
+    height: 300px;
+}
+
+#admin-set{
+    margin-top: 50px;
+    padding: 30px;
+    border-radius: 30px;
+    box-shadow: 0px 10px 5px black;
+}
+
+#admin-admin{
+
+    margin-top: 10px;
+    padding: 30px;
+    border-radius: 30px;
+    box-shadow: 0px 10px 5px black;
+}
+
+#admin-admin-admin{
+    font-size: xx-large;
+    font-weight: bold;
+    
+}
+
+#profile-body {
+    background-image: url('../resources/background_image1.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-color: rgba(0, 0, 0, 0.6);
+}
+
+#profile-username-box{
+    margin-top: 30px;
+    border-radius: 30px;
+    box-shadow: 0px 10px 5px black;
+}
+
+#profile-username-display{
+    align-items: center;
+    display: flex;
+}
+#profile-username{
+    padding: 20px;
+    font-size: x-large;
+}
+
+#profile-cont1{
+    display: flex;
+    width: 420px;
+    padding: 50px 0;
+    background-color: #f8f9fa; /*ovo je bg-light boja*/
+    border-radius: 30px;
+    align-items: center;
+    justify-content: center;
+}
+
+#profile-circ1{
+    position: relative;
+    height: 250px;
+    width: 250px;
+    border-radius: 50%;
+    background: conic-gradient(#d1002a 3.6deg, #ededed  0deg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#profile-circ1::before{
+    content: "";
+    position: absolute;
+    height: 210px;
+    width: 210px;
+    border-radius: 50%;
+    background-color: #f8f9fa;
+}
+
+#profile-c-val1{
+    position: relative;
+    font-size: 50px;
+    font-weight: 800;
+}
+
+
+
+#profile-cont2{
+    display: flex;
+    width: 420px;
+    padding: 50px 0;
+    background-color: #f8f9fa; /*ovo je bg-light boja*/
+    border-radius: 30px;
+    align-items: center;
+    justify-content: center;
+}
+
+#profile-circ2{
+    position: relative;
+    height: 250px;
+    width: 250px;
+    border-radius: 50%;
+    background: conic-gradient(#0023e8 3.6deg, #ededed  0deg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#profile-circ2::before{
+    content: "";
+    position: absolute;
+    height: 210px;
+    width: 210px;
+    border-radius: 50%;
+    background-color: #f8f9fa;
+}
+
+#profile-c-val2{
+    position: relative;
+    font-size: 50px;
+    font-weight: 800;
+}
+
+#profile-favorite-word-display{
+    margin-top: 15px;
+    margin-bottom: 30px;
+}
+
+#profile-favorite-word{
+    background-color: #ededed;
+    border-radius: 15px;
+    font-size: xx-large;
+    font-weight: 900;
+    padding: 10px;
+    box-shadow: 0px 5px 5px black;
+}
+
+#profile-favorite-tile{
+    background-color: #ededed;
+    /* box-shadow: 0px 5px 5px grey; */
+}
+
+#profile-favorite-tile-display{
+    margin: 20px 0;
+}

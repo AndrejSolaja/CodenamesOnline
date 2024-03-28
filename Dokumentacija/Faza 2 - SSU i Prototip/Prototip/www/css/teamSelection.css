@@ -1,0 +1,119 @@
+/* Teodor Djelic */
+@import url(rootstyle.css);
+
+main{
+    width: 65%;
+    height: 95%;
+    margin: auto;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.teamBlock{
+    height: 87%;
+    width: calc(20% + 150px);
+    color: white;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    justify-content: center;
+    padding: 30px;
+    padding-bottom: 80px;
+    font-size: 33px;
+    border-radius: 20px;
+}
+
+.teamBlock h1{
+    margin-bottom: 20px;
+}
+
+.teamBlock:nth-child(1){
+    background-image: linear-gradient(to bottom right, #ee162c, #9c1825);
+}
+
+.teamBlock:nth-child(2){
+    background-image: linear-gradient(to bottom right, rgb(12, 116, 177), rgb(24, 82, 129));
+}
+
+.teamBlockButtons{
+    width: 100%;
+}
+
+.teamBlockButtons button{
+    width: 100%;
+    margin-bottom: 30px;
+    height: 100px;
+    border-radius: 20px;
+}
+
+.teamBlock img{
+    width: 100%;
+    border-width: 10px;
+    border-radius: 30px;
+    border-style: solid;
+    margin-bottom: 30px;
+}
+
+.teamBlock:nth-child(1) img{
+    border-color: rgb(221, 32, 19);
+}
+
+.teamBlock:nth-child(2) img{
+    border-color: rgb(36, 36, 194);
+}
+
+.teamBlock textarea{
+    width: 100%;
+    background-color: transparent;
+    resize: none;
+    color:white;
+    border-radius: 10px;
+    border-width: 3px;
+    margin-bottom: 50px;
+    font-size: 25px;
+    height: 300px;
+}
+
+.teamBlock:nth-child(1) textarea{
+    border-color: rgb(221, 32, 19);
+    background-color: #5c010a48;
+}
+
+.teamBlock:nth-child(2) textarea{
+    border-color: rgb(36, 36, 194);
+    background-color: #03015c48;
+}
+
+.teamBlock:nth-child(1) button{
+    /* background-image: linear-gradient(to bottom right, #EE7911, #d62912); */
+    background-color: darkred;
+    border: none;
+    color: white;
+    box-shadow: 0px 5px 3px rgb(34, 34, 34);
+}
+
+.teamBlock:nth-child(1) .disabledButton{
+    /* background-image: linear-gradient(to bottom right, #ee78117e, #d6291280); */
+    background-color: rgb(100, 0, 0);
+    color:rgb(160, 160, 160);
+}
+
+.teamBlock:nth-child(2) .disabledButton{
+    /* background-image: linear-gradient(to bottom right, #1a13ecbd, #16119cb6); */
+    background-color: #0e0a7b;
+    color:rgb(152, 152, 152);
+}
+
+.teamBlock:nth-child(2) button{
+    /* background-image: linear-gradient(to bottom right, #1913EC, #16119c); */
+    background-color: #16119c;
+    border: none;
+    color: white;
+    box-shadow: 0px 5px 3px rgb(34, 34, 34);
+}
+
+.teamBlock h2{
+    margin-top: 10px;
+}

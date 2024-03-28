@@ -1,0 +1,75 @@
+<!-- Teodor Djelic -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Codenames Online - Register</title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"/>
+
+    <link rel="stylesheet" href="../css/blocks.css" type="text/css"/>
+
+    <script src="../js/register.js" defer></script>
+
+</head>
+
+<body>
+
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light">
+            <a class="navbar-brand" href="Home.html">
+                <img src="../resources/logo.png" alt="" height="40">
+            </a>
+
+
+            <ul class="nav nav-pills ml-auto">
+                <li class="nav-item">
+                  <a class="nav-link active bg-danger font-weight-bold" aria-current="page" href="login.html">Log In</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active bg-info" href="rules.html"><i class="fa fa-question-circle"></i></a>
+                </li>
+            </ul>
+
+        </nav>
+    </header>
+
+    <main>
+        <div class="block">
+            <p> Register </p>
+
+            <div style="padding: 10px; padding-bottom: 15px;">
+                <p id="errorMsg"></p>
+            </div>
+
+            <label>
+                <input id="username" type="text" class="textfield" onchange="updateUColors()" required>
+                <span class="placeholder">Username</span>
+            </label>
+            <label>
+                <input id="email" type="text" class="textfield" onchange="updateEColors()" required>
+                <span class="placeholder">Email</span>
+            </label>
+            <label>
+                <input id="password" type="password" class="textfield" onchange="updatePColors()" required>
+                <span class="placeholder">Password</span>
+            </label>
+            <label>
+                <input id="password_confirmed" type="password" class="textfield" onchange="updatePCColors()" required>
+                <span class="placeholder">Confirmed password</span>
+            </label>
+
+            <button class="active bg-danger" style="width: 100%;" onclick="onClick()">Register</button>
+        </div>
+    </main>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+</body>
+
+</html>

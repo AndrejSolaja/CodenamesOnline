@@ -1,0 +1,121 @@
+<!-- Djordje Vukovic -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Codenames Online - Profile</title>
+    
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../css/styles.css">
+</head>
+
+<body id="profile-body">
+
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light">
+            <a class="navbar-brand" href="HomeLoggedIn.html">
+                <img src="../resources/logo.png" alt="" height="40">
+            </a>
+
+
+            <ul class="nav nav-pills ml-auto">
+                <li class="nav-item">
+                  <a class="nav-link active bg-warning" href="#"><i class="fa fa-user"></i> Username</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link active bg-info" href="rulesLoggedIn.html"><i class="fa fa-question-circle"></i></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active bg-danger" href="Home.html"><i class="fa fa-sign-out"></i></a>
+                </li>
+            </ul>
+
+        </nav>
+    </header>
+
+    <div id="profile-username-box" class="container bg-light">
+        <div id="profile-username-display">
+            <span id="profile-username">
+                <i class="fa fa-user fa-2x"></i>
+                Username
+            </span>
+        </div>
+    </div>
+
+    <div class="container bg-light">
+        <!-- Dva kruga za winrate -->
+        <div class="row">
+            <div class="col-lg-6">
+
+            </div>
+
+            <div class="col-lg-6">
+
+            </div>
+        </div>
+    </div>
+
+
+    <div id="admin-set"class="container bg-light">
+        <div class="row text-center">
+            <div class="container col-6">
+                <span class="font-weight-bold h3">Win-rate as LEADER</span>
+            </div>
+            <div class="container col-6">
+                <span class="font-weight-bold h3">Win-rate as GUESSER</span>
+            </div>
+        </div>
+        <div class="row">
+            <!-- Leader win-rate -->
+            <div id="profile-cont1" class="container col-6">
+                <div id="profile-circ1" class="circular-progress1">
+                    <span id="profile-c-val1" class="progress-value1">
+                        0%
+                    </span>
+                </div>
+            </div>
+            
+
+            <!-- Guesser win-rate -->
+            <div id="profile-cont2" class="container col-6">
+                <div id="profile-circ2" class="circular-progress2">
+                    <span id="profile-c-val2" class="progress-value2">
+                        0%
+                    </span>
+                </div>
+            </div>
+
+        </div>
+        <hr>
+        <div class="row">
+            <div id="" class="container col-12 text-center">
+                <span class="font-weight-bold h4">Favorite Word</span>
+                <div id="profile-favorite-word-display">
+                    <span id="profile-favorite-word">SMOOTHIE</span>
+                </div>
+                <hr>
+            </div>
+        </div>
+        <div class="row">
+            <div class="cotainer col-12 text-center">
+                <span class="font-weight-bold h4">Favorite Tile:</span>
+                <div id="profile-favorite-tile-display">
+                    <img id="profile-favorite-tile" src="../resources/favorite_tile/0.png" alt="" style="height: 300px;">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="../js/script.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js">
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,90 @@
+<!-- Djordje Vukovic -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Codenames Online - Admin</title>
+    
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../css/styles.css">
+</head>
+
+<body id="home-body">
+
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light">
+            <a class="navbar-brand" href="Home.html">
+                <img src="../resources/logo.png" alt="" height="40">
+            </a>
+        </nav>
+    </header>
+
+    <div id="admin-admin" class="container bg-light">
+        <div id="admin-admin-admin">
+            Admin
+        </div>
+    </div>
+
+    <div id="admin-set"class="container bg-light">
+        <div class="row">
+            <!-- Aktivan set i lista -->
+            <div class="container col-3">
+                <div id="admin-active-set"class="container">
+                    <span id="admin-active-set-display"class="font-weight-bold">
+                        Active Set: 
+                    </span>
+                    <span id="admin-active-set-name">
+                        Default Set 0
+                    </span>
+                </div>
+                <div id="admin-list-set"class="container">
+                    <div id="admin-list"class="list-group overflow-auto">
+                        <button class="list-group-item list-group-item-action" disabled>Default Set 0</button>
+                        <button class="list-group-item list-group-item-action list-group-item-info">Default Set 1</button>
+                        <button class="list-group-item list-group-item-action">Default Set 2</button>
+                        <button class="list-group-item list-group-item-action">Smešne reči</button>
+                        <button class="list-group-item list-group-item-action">Markove reci</button>
+                        <button class="list-group-item list-group-item-action">Moj set</button>
+                        <button class="list-group-item list-group-item-action">Haha kul word set</button>
+                    </div>
+                </div>
+            </div>
+            <!-- Uredjivanje seta -->
+            <div id="admin-set-change" class="container col-9">
+                <form>
+                    <div class="form-group">
+                        <label for="nameInput" class="font-weight-bold">Name: </label>
+                        <input class="form-control" id="admin-name-input" value="Default Set 1">
+                    </div>
+                    <div class="form-group">
+                        <label for="wordsInput" class="font-weight-bold">Words:</label>
+                        <textarea class="form-control" id="admin-word-input" rows="5">zamak, hleb, nebo, jastuk, olovka, koza, primirje, crna, loptica, kosarka, jaster, albanija, tenk, doktor, zloban, jevrej, muzika, strela, metal, novcanik, gumica, medved, kompjuter, misao, cement, zvuk, torba, štit, kocka, miš</textarea>
+                    </div>
+                
+                    <div id="admin-buttons" class="container">
+                        <button type="submit" class="btn btn-warning font-weight-bold">ACTIVATE</button>
+                        <button type="submit" class="btn btn-success font-weight-bold">CHANGE</button>
+                        <button type="submit" class="btn btn-danger font-weight-bold">DELETE</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"
+        integrity="sha384-5KptzEQC7d/RXSMOo5nxBDRu87TN9nbtz7+6csmIh6lUNqNJs7aiCsA6uK9fw2VJ"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+        integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shCk+pcOJ3fZ3cWlEkk/8YfOj8+1F0OxVIta" crossorigin="anonymous">
+    </script>
+</body>
+
+</html>

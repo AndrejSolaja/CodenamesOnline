@@ -1,0 +1,90 @@
+/* Teodor Djelic */
+@import url(rootstyle.css);
+
+main{
+    width: 50%;
+    height: 95%;
+    margin: auto;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.block{
+    background-color: var(--main-background-color);
+    border-radius: 10px;
+    padding: 20px;
+
+    margin-left:-130px;
+    margin-top:-35px;
+    width: 500px;
+}
+
+.block > p{
+    font-size: 50px;
+    margin-bottom: 0px;
+}
+
+#errorMsg{
+    display: none;
+    font-size: 20px;
+    margin-bottom: 3330px;
+    color: #dc3545!important;
+}
+
+.block label{
+    width: 100%;
+    margin: auto;
+}
+
+.textfield {
+   position: relative;
+    padding: 10px 15px;
+    border:1px solid var(--button-border-color);
+    border-radius:5px;
+    box-shadow: none;
+    background-color: var(--main-background-color);;
+    width: 100%;
+}
+.block span {
+    position: relative;
+    z-index: 1;
+    top: -35px;
+    left: 20px;
+    color: black;
+    padding:0 5px;
+    background-color: var(--main-background-color);;
+}
+.textfield:focus {
+    border:1px solid #0d47a1;
+}
+input:focus ~ span,
+input:not(:focus):valid ~ span {
+    top: -57px;
+    left: 15px;
+}
+.textfield, span {
+	transition: ease-in-out 0.2s all;
+	-webkit-transition: ease-in-out 0.2s all;
+	-moz-transition: ease-in-out 0.2s all;
+	-o-transition: ease-in-out 0.2s all;
+}
+
+.line{
+    display: flex;
+    flex-direction: row;
+    justify-content:space-between;
+    align-items: baseline;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.block button{
+    color: #fff;
+    border-radius: 5px;
+    border: none;
+    padding: 15px;
+    padding-top: 9px;
+    padding-bottom: 10px;
+}

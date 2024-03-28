@@ -1,0 +1,31 @@
+/* Djordje Vukovic */
+body {
+    background-image: url('background_image1.webp');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-color: rgba(0, 0, 0, 0.6);
+}
+
+.navbar {
+    background-color: rgba(0, 0, 0, 0.5);
+    padding-left: 25%;
+    padding-right: 25%;
+    opacity: 1;
+}
+
+.navbar-brand {
+    color: #fff;
+    /* opacity: 1; */
+}
+
+.nav-item{
+    padding-left: 10px; 
+}
+
+.btn-big {
+    font-size: 100px;
+    font-weight: 800;
+    padding: 100px 100px;
+    margin-top: 40%; /* Adjust for vertical positioning */
+}

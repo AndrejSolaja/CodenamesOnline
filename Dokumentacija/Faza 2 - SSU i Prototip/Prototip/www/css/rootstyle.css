@@ -1,0 +1,40 @@
+/* Teodor Djelic */
+@import url(https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css);
+
+:root{
+    --main-background-color: rgba(238, 238, 238, 1);
+    --button-border-color: #181818;
+}
+
+body {
+    background-image: url('../resources/background_image1.webp');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-color: rgba(0, 0, 0, 0.6);
+    min-height: 100dvh;
+    height: 100dvh;
+}
+
+.navbar {
+    background-color: rgba(0, 0, 0, 0.5);
+    padding-left: 25%;
+    padding-right: 25%;
+    opacity: 1;
+}
+
+.navbar-brand {
+    color: #fff;
+    /* opacity: 1; */
+}
+
+.nav-item{
+    padding-left: 10px; 
+}
+
+.btn-big {
+    font-size: 100px;
+    font-weight: 800;
+    padding: 100px 100px;
+    margin-top: 40%; /* Adjust for vertical positioning */
+}
