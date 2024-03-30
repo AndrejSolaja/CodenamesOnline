@@ -11,6 +11,7 @@
         integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="../css/styles.css">
+    <script src="../js/newSet.js" defer></script>
 </head>
 
 <body id="new-set-body">
@@ -38,21 +39,23 @@
     </header>
 
     <div id = "new-set-form" class="container bg-light">
-        <form>
+        <!-- <form> -->
             <div class="form-group">
-              <label for="nameInput" class="font-weight-bold">Name: </label>
+              <label for="nameInput" class="font-weight-bold h3">Name: </label>
+              <p id="name_error"></p>
               <input class="form-control" id="nameInput" placeholder="Enter Word Set name">
               <small class="form-text text-muted">Be creative! Our Admin might pick your set!</small>
             </div>
             <div class="form-group">
-                <label for="wordsInput" class="font-weight-bold">Words:</label>
+                <label for="wordsInput" class="font-weight-bold h3">Words:</label>
+                <p id="word_error"></p>
                 <textarea class="form-control" id="wordsInput" placeholder="Enter minimum 31 words (eg. 'flower, dog, car...')"rows="3"></textarea>
             </div>
            
             <div class="container text-center">
-                <button type="submit" class="btn btn-success font-weight-bold">SEND</button>
+                <button onclick="send_set()" class="btn btn-success font-weight-bold">SEND</button>
             </div>
-          </form>
+          <!-- </form> -->
     </div>
 
     <!-- Bootstrap JS and dependencies -->

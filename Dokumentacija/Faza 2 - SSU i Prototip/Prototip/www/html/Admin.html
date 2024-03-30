@@ -11,6 +11,7 @@
         integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="../css/styles.css">
+    <script src="../js/admin.js" defer></script>
 </head>
 
 <body id="home-body">
@@ -45,11 +46,11 @@
                     <div id="admin-list"class="list-group overflow-auto">
                         <button class="list-group-item list-group-item-action" disabled>Default Set 0</button>
                         <button class="list-group-item list-group-item-action list-group-item-info">Default Set 1</button>
-                        <button class="list-group-item list-group-item-action">Default Set 2</button>
-                        <button class="list-group-item list-group-item-action">Smešne reči</button>
-                        <button class="list-group-item list-group-item-action">Markove reci</button>
-                        <button class="list-group-item list-group-item-action">Moj set</button>
-                        <button class="list-group-item list-group-item-action">Haha kul word set</button>
+                        <button onclick="unsaved_change()" class="list-group-item list-group-item-action">Default Set 2</button>
+                        <button onclick="unsaved_change()" class="list-group-item list-group-item-action">Smešne reči</button>
+                        <button onclick="unsaved_change()" class="list-group-item list-group-item-action">Markove reci</button>
+                        <button onclick="unsaved_change()" class="list-group-item list-group-item-action">Moj set</button>
+                        <button onclick="unsaved_change()" class="list-group-item list-group-item-action">Haha kul word set</button>
                     </div>
                 </div>
             </div>
@@ -66,9 +67,9 @@
                     </div>
                 
                     <div id="admin-buttons" class="container">
-                        <button type="submit" class="btn btn-warning font-weight-bold">ACTIVATE</button>
-                        <button type="submit" class="btn btn-success font-weight-bold">CHANGE</button>
-                        <button type="submit" class="btn btn-danger font-weight-bold">DELETE</button>
+                        <button type="submit" onclick = "activate_set()" class="btn btn-warning font-weight-bold">ACTIVATE</button>
+                        <button type="submit" onclick = "change()" class="btn btn-success font-weight-bold">CHANGE</button>
+                        <button type="submit" onclick = "remove_set()" class="btn btn-danger font-weight-bold">DELETE</button>
                     </div>
                 </form>
             </div>

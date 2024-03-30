@@ -253,3 +253,11 @@
 #profile-favorite-tile-display{
     margin: 20px 0;
 }
+
+#name_error{
+    color: #d1002a;
+}
+
+#word_error{
+    color: #d1002a;
+}
