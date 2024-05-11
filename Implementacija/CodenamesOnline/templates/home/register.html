@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block title %}
+	Register
+{% endblock %}
+
+{% block css_style %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/blocks.css' %}">
+{% endblock %}
+
+{% block js_script %}
+	<script src="{% static 'js/register.js' %}" defer></script>
+{% endblock %}
+
+{% block body %}
+    <main>
+        <div class="block">
+            <p> Register </p>
+
+            <div style="padding: 10px; padding-bottom: 15px;">
+                <p id="errorMsg"></p>
+            </div>
+
+            <label>
+                <input id="username" type="text" class="textfield" onchange="updateUColors()" required>
+                <span class="placeholder">Username</span>
+            </label>
+            <label>
+                <input id="email" type="text" class="textfield" onchange="updateEColors()" required>
+                <span class="placeholder">Email</span>
+            </label>
+            <label>
+                <input id="password" type="password" class="textfield" onchange="updatePColors()" required>
+                <span class="placeholder">Password</span>
+            </label>
+            <label>
+                <input id="password_confirmed" type="password" class="textfield" onchange="updatePCColors()" required>
+                <span class="placeholder">Confirmed password</span>
+            </label>
+
+            <button class="active bg-danger" style="width: 100%;" onclick="onClick()">Register</button>
+        </div>
+    </main>
+{% endblock %}
+

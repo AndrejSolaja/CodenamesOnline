@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+
+{% block title %}
+	Team Select
+{% endblock %}
+
+{% block css_style %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/teamSelection.css' %}">
+{% endblock %}
+
+{% block js_script %}
+	<script src="{% static 'js/teamSelection.js' %}" defer></script>
+{% endblock %}
+
+{% block body %}
+    <main>
+
+        <div class="teamBlock">
+
+            <h1>RED TEAM</h1>
+
+            <picture>
+                <img src={% static 'resources/team_select_red.jpg' %} alt="" />
+            </picture>
+
+            <textarea readonly disabled id="igraci1">
+
+            </textarea>
+
+            <div class="teamBlockButtons">
+                <button id="b1" onclick="lider1()">Join as leader</button>
+                <button id="b2" onclick="igrac1()">Join as user</button>
+            </div>
+
+            <h2>DEFAULT SET</h2>
+        </div>
+
+        <div class="teamBlock">
+
+            <h1>BLUE TEAM</h1>
+
+            <picture>
+                <img src={% static 'resources/team_select_blue.jpg' %} alt="" />
+            </picture>
+
+            <textarea readonly disabled id="igraci2">
+
+            </textarea>
+
+            <div class="teamBlockButtons">
+                <button id="b3" onclick="lider2()">Join as leader</button>
+                <button id="b4" onclick="igrac2()">Join as user</button>
+            </div>
+
+            <h2>DEFAULT SET</h2>
+        </div>
+
+    </main>
+{% endblock %}
+

@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block title %}
+	Home
+{% endblock %}
+
+{% block css_style %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+{% endblock %}
+
+{% block body %}
+    <div class="container text-center">
+        <a href='/game'>
+            <button id="home-play-btn" class="btn btn-danger btn-big" href='/game'>PLAY</button>
+        </a>
+    </div>
+
+    {% if user.is_authenticated %}
+        <div class="container text-center col col-lg-12">
+            <a href='/newset'>
+                <button id="home-logged-new-word-set"class="btn btn-warning btn-big">New Word Set</button>
+            </a>
+        </div>
+    {% endif %}
+{% endblock %}
+

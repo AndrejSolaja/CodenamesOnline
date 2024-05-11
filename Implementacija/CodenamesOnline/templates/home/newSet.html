@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block title %}
+	New Set
+{% endblock %}
+
+{% block css_style %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+{% endblock %}
+
+{% block js_script %}
+	<script src="{% static 'js/newSet.js' %}" defer></script>
+{% endblock %}
+
+{% block body %}
+    <div id = "new-set-form" class="container bg-light">
+        <!-- <form> -->
+            <div class="form-group">
+              <label for="nameInput" class="font-weight-bold h3">Name: </label>
+              <p id="name_error"></p>
+              <input class="form-control" id="nameInput" placeholder="Enter Word Set name">
+              <small class="form-text text-muted">Be creative! Our Admin might pick your set!</small>
+            </div>
+            <div class="form-group">
+                <label for="wordsInput" class="font-weight-bold h3">Words:</label>
+                <p id="word_error"></p>
+                <textarea class="form-control" id="wordsInput" placeholder="Enter minimum 31 words (eg. 'flower, dog, car...')"rows="3"></textarea>
+            </div>
+           
+            <div class="container text-center">
+                <button onclick="send_set()" class="btn btn-success font-weight-bold">SEND</button>
+            </div>
+          <!-- </form> -->
+    </div>
+{% endblock %}
+

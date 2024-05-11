@@ -1,0 +1,92 @@
+{% extends 'base.html' %}
+
+{% block title %}
+	Profile
+{% endblock %}
+
+{% block css_style %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+{% endblock %}
+
+{% block js_script %}
+	<script src="{% static 'js/script.js' %}" defer></script>
+{% endblock %}
+
+{% block body %}
+    <div id="profile-username-box" class="container bg-light">
+        <div id="profile-username-display">
+            <span id="profile-username">
+                <i class="fa fa-user fa-2x"></i>
+                {{ user.name }}
+            </span>
+        </div>
+    </div>
+
+    <div class="container bg-light">
+        <!-- Dva kruga za winrate -->
+        <div class="row">
+            <div class="col-lg-6">
+
+            </div>
+
+            <div class="col-lg-6">
+
+            </div>
+        </div>
+    </div>
+
+
+    <div id="admin-set"class="container bg-light">
+        <div class="row text-center">
+            <div class="container col-6">
+                <span class="font-weight-bold h3">Win-rate as LEADER</span>
+            </div>
+            <div class="container col-6">
+                <span class="font-weight-bold h3">Win-rate as GUESSER</span>
+            </div>
+        </div>
+        <div class="row">
+            <!-- Leader win-rate -->
+            <div id="profile-cont1" class="container col-6">
+                <div id="profile-circ1" class="circular-progress1">
+                    <span id="profile-c-val1" class="progress-value1">
+                        0%
+                    </span>
+                </div>
+            </div>
+
+
+            <!-- Guesser win-rate -->
+            <div id="profile-cont2" class="container col-6">
+                <div id="profile-circ2" class="circular-progress2">
+                    <span id="profile-c-val2" class="progress-value2">
+                        0%
+                    </span>
+                </div>
+            </div>
+
+        </div>
+        <hr>
+        <div class="row">
+            <div id="" class="container col-12 text-center">
+                <span class="font-weight-bold h4">Favorite Word</span>
+                <div id="profile-favorite-word-display">
+                    <span id="profile-favorite-word">SMOOTHIE</span>
+                </div>
+                <hr>
+            </div>
+        </div>
+        <div class="row">
+            <div class="cotainer col-12 text-center">
+                <span class="font-weight-bold h4">Favorite Tile:</span>
+                <div id="profile-favorite-tile-display">
+                    {% if image == 0 %}
+                        <img id="profile-favorite-tile" src="{% static "resources/favorite_tile/0.png" %}" alt="" style="height: 300px;">
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+

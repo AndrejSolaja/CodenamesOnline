@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% block title %}
+	Rules
+{% endblock %}
+
+{% block css_style %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/rules.css' %}">
+{% endblock %}
+
+{% block js_script %}
+{#	<script src="{% static 'js/register.js' %}" defer></script>#}
+{% endblock %}
+
+{% block body %}
+    <main>
+
+        <div class="card">
+            <h1> Codenames </h1>
+
+            <p> Codenames is a 4+ player board game. Players are split into two teams, teams being red or blue. Each team chooses one captain, and the rest are guessers. Code names is competitive in its nature, hence the teams will play against one another. </p>
+
+        </div>
+
+        <div class="card">
+
+            <h1> Game </h1>
+
+            <p> Game is played out in rounds. Each round, 25 words will be chosen at random from a given set of words. Seven words are assigned to red team, seven words are assigned to blue team, with an additional card being assigned to the team that plays first. Out of the 25 words, one word is an assassin's card, which does not belong to either team and will be discussed in the later part of this text as to what its purpose is. All the cards that are not the assasin card or do not belong to any team, are neutral. Only captains know to whom the words belong to, and what kind of words they are.</p>
+
+        </div>
+
+        <div class="card">
+
+            <h1> Rounds </h1>
+
+            <p> The goal of the game is for one team's guessers to guess all of their team's cards. Rounds are played out in turns. At the start of each turn, captain gives an association that should hint guessers as to which words belong to their team. In pair with the given association, captain also tells them how many words should the association be associated with. Guessers can select words that they believe are their's. Each team's turn ends if they guess a word that does not belong to their team, if they guess one word more than the captain's word count, or if they guess the assassin's card. In the case a team picks out the assasin's card, they lose the round immediately. The round is played out until one of the teams either loses, or until one of the teams guess all their words, in which case they win.</p>
+
+        </div>
+
+
+        <div class="card">
+            <h3> Those are all the rules of Codenames. </h3>
+            <h3> We hope you have fun playing it! </h3>
+        </div>
+
+    </main>
+{% endblock %}
+

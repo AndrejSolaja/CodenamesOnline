@@ -1,0 +1,48 @@
+/* Teodor Djelic */
+@import url(rootstyle.css);
+
+main{
+    width: 50%;
+    height: 95%;
+    margin: auto;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.card{
+    position: absolute;
+    width: 300px;
+    padding: 30px;
+    padding-left: 40px;
+    padding-right: 40px;
+    border-radius: 30px;
+    color: white;
+}
+
+.card:nth-child(1){
+    background-image: linear-gradient(to bottom right, #b10c1d, #aa333e);
+    translate: -15dvw -25dvh;
+    rotate: -3deg;
+}
+
+.card:nth-child(2){
+    background-image: linear-gradient(to bottom right, rgb(12, 116, 177), rgb(24, 82, 129));
+    translate: 14dvw -13dvh;
+    rotate: 2deg;
+    width: 350px;
+}
+
+.card:nth-child(3){
+    background-image: linear-gradient(to bottom right, #6b6b6b, #7c7c7c);
+    translate: -13dvw 18dvh;
+    rotate: 1deg;
+    width: 375px;
+}
+
+.card:nth-child(4){
+    background-image: linear-gradient(to bottom right, #000000, #35292a);
+    translate: 14dvw 26dvh;
+    text-align: center;
+}

@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block title %}
+	Login
+{% endblock %}
+
+{% block css_style %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/blocks.css' %}">
+{% endblock %}
+
+{% block js_script %}
+	<script src="{% static 'js/login.js' %}" defer></script>
+{% endblock %}
+
+{% block body %}
+    <main>
+        <div class="block">
+            <p> Log in </p>
+
+            <div style="padding: 10px; padding-bottom: 15px;">
+                <p id="errorMsg"></p>
+            </div>
+
+            <label>
+                <input id="username_email" type="text" class="textfield" onchange="updateUColors()" required>
+                <span class="placeholder">Username/Email</span>
+            </label>
+            <label>
+                <input id="password" type="password" class="textfield" onchange="updatePColors()" required>
+                <span class="placeholder">Password</span>
+            </label>
+
+            <div class="line">
+                <a href='/register'>Register</a>
+                <a href='/recovery'>Forgot my password</a>
+                <button class="active bg-danger" onclick="onClick()">Log in</button>
+            </div>
+        </div>
+    </main>
+{% endblock %}
+

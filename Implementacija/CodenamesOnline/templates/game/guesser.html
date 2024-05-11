@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+
+{% block title %}
+	Codenames Online - Guesser
+{% endblock %}
+
+{% block css_style %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/pogadjanjePojma.css' %}">
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+{% endblock %}
+
+{% block js_script %}
+	<script src="{% static 'js/pogadjanjePojma.js' %}" defer></script>
+{% endblock %}
+
+{% block body %}
+<div class="container mt-5 bg-light main">
+  <div class="row text-center">
+    <div class="col">
+      <h1>WORD: Mekano 2</h1>
+    </div>
+
+  </div>
+  <div class="row">
+    <div class="col">
+      <div class="d-flex justify-content-center">
+          <table>
+            <tr>
+                <td><div class="box" id="box1">Zamak</div></td>
+                <td><div class="box" id="box2">Hleb</div></td>
+                <td><div class="box" id="box3">Nebo</div></td>
+                <td><div class="box" id="box4">Jastuk</div></td>
+                <td><div class="box" id="box5">Olovka</div></td>
+            </tr>
+            <tr>
+                <td><div class="box" id="box6">Koza</div></td>
+                <td><div class="box" id="box7">Primirije</div></td>
+                <td><div class="box" id="box8">Crna</div></td>
+                <td><div class="box" id="box9">Loptica</div></td>
+                <td><div class="box" id="box10">Kosarka</div></td>
+            </tr>
+            <tr>
+                <td><div class="box" id="box11">Jastreb</div></td>
+                <td><div class="box" id="box12">Albanija</div></td>
+                <td><div class="box" id="box13">Tenk</div></td>
+                <td><div class="box" id="box14">Doktor</div></td>
+                <td><div class="box" id="box15">Zloban</div></td>
+            </tr>
+            <tr>
+                <td><div class="box" id="box16">Jevrej</div></td>
+                <td><div class="box" id="box17">Muzika</div></td>
+                <td><div class="box" id="box18">Strela</div></td>
+                <td><div class="box" id="box19">Metal</div></td>
+                <td><div class="box" id="box20">Novčanik</div></td>
+            </tr>
+            <tr>
+                <td><div class="box" id="box21">Gumica</div></td>
+                <td><div class="box" id="box22">Medved</div></td>
+                <td><div class="box" id="box23">Kompjuter</div></td>
+                <td><div class="box" id="box24">Misao</div></td>
+                <td><div class="box" id="box25">Cement</div></td>
+            </tr>
+          </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="row centered mt-3">
+    <div class="container row align-items-center text-center">
+      <div class="col">
+        <button type="submit" class="btn btn-primary " onclick="checkColor()">GUESS</button>
+      </div>
+      <div class="col">
+        <button type="submit" class="btn btn-primary " onclick="checkColor()">End Turn</button>
+      </div>
+    </div>
+  </div>
+
+</div>
+{% endblock %}
+
