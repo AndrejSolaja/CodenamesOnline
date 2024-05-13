@@ -10,29 +10,35 @@
 {% endblock %}
 
 {% block js_script %}
-	<script src="{% static 'js/newSet.js' %}" defer></script>
+{#	<script src="{% static 'js/newSet.js' %}" defer></script>#}
 {% endblock %}
 
 {% block body %}
     <form method="POST" id = "new-set-form" class="container bg-light">
+        {% csrf_token %}
         <!-- <form> -->
             <div class="form-group">
-              <label for="nameInput" class="font-weight-bold h3">Name: </label>
-              <p id="name_error"></p>
-              <input class="form-control" id="nameInput" placeholder="Enter Word Set name">
+              <label for="nameInput" class="font-weight-bold h3">Name:</label>
+              <p id="name_error">{{ name_error }}</p>
+              <input class="form-control" id="nameInput" placeholder="Enter Word Set name" name="name_input" value='{{ setName }}'>
               <small class="form-text text-muted">Be creative! Our Admin might pick your set!</small>
             </div>
             <div class="form-group">
                 <label for="wordsInput" class="font-weight-bold h3">Words:</label>
-                <p id="word_error"></p>
-                <textarea class="form-control" id="wordsInput" placeholder="Enter minimum 31 words (eg. 'flower, dog, car...')"rows="3"></textarea>
+                <p id="word_error">{{ word_error }}</p>
+                <textarea class="form-control" id="wordsInput" name ="words_input" placeholder="Enter minimum 31 words (eg. 'flower, dog, car...')"rows="3">{{ words }}</textarea>
             </div>
-           
+
+
+            <div class="text-center">
+                <p id="success_msg"><span class="font-weight-bold">{{ setName }}</span>{{ success_msg }}</p>
+            </div>
             <div class="container text-center">
 {#                <button onclick="send_set()" class="btn btn-success font-weight-bold">SEND</button>#}
                 <input type="submit" class="btn btn-success font-weight-bold" value="SEND">
             </div>
           <!-- </form> -->
     </form>
+
 {% endblock %}
 
