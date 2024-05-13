@@ -2,6 +2,8 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
 
+from home.forms import KorisnikLoginForm
+
 from home.models import *
 
 # Create your views here.
@@ -14,7 +16,57 @@ def logout_req(request):
     return redirect('home')
 
 def login_req(request):
-    return render(request, 'home/login.html')
+    """
+    Display a login page and authenticate user :model:`CodenamesOnline.Korisnik`.
+
+    **Context**
+
+    ``form``
+        A login form.
+    ``errorMessage``
+        An error message to be displayed.
+
+    **Template:**
+
+    :template:`CodenamesOnline/templates/home/login.html`
+    """
+    if request.method == "POST":
+
+        form = KorisnikLoginForm(request = request, data = request.POST)
+
+        if form.is_valid():
+            username = form.cleaned_data['username']
+            password = form.cleaned_data['password']
+
+            user = authenticate(username = username, password = password)
+
+            if user is None:
+                
+                context = {
+                'errorMessage': "Credentials are invalid.",
+                'form': form
+                }
+
+                return render(request, 'home/login.html', context)
+            else:
+                login(request,user)
+                return redirect('home')
+        else:
+            context = {
+                'errorMessage': "Credentials are invalid.",
+                'form': form
+                }
+
+            return render(request, 'home/login.html', context)
+                
+    else:
+        form = KorisnikLoginForm()
+
+        context = {
+            'form': form
+        }
+
+        return render(request, 'home/login.html', context)
 
 def newset(request):
     if request.method=="POST":

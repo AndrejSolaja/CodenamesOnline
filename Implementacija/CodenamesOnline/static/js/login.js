@@ -6,29 +6,14 @@ var password_field = document.getElementById("password");
 
 var error_box = document.getElementById("errorMsg");
 
+if(error_box.innerHTML === "")
+{
+    error_box.style.display = "None"    
+}
+
 function onClick()
 {
     updateColors();
-
-    if(!username_email_field.value.localeCompare("admin") && !password_field.value.localeCompare("admin")){
-        window.location.href = 'administrator';
-    }
-
-    if(!username_email_field.value.localeCompare("")
-        || !password_field.value.localeCompare(""))
-    {
-        return;
-    }
-
-    if(!attempted){
-        attempted = true;
-        error_box.style.display = "inline";
-        error_box.innerHTML = "Incorrect password!";
-    }
-    else{
-        window.location.href = 'home';
-    }
-
 }
 
 function updateColors()
