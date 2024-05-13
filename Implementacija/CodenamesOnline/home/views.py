@@ -94,12 +94,19 @@ def profile(request):
     # izdvajanja omiljene reci iz baze
     listaAsocijacija = Asocijacija.objects.filter(user_id = korisnik.id).all()
     listaReci = [str(x.zadataRec) for x in listaAsocijacija]
-    najcescaRec = max(listaReci, key=listaReci.count)
+    if len(listaReci) > 0:
+        najcescaRec = max(listaReci, key=listaReci.count)
+    else:
+        najcescaRec = ''
+
 
     # izdvajanje omiljenog polja za pogadjanje iz baze
     listaPolja = Pogadjanje.objects.filter(user_id = korisnik.id).all()
     listaIndeks = [x.poljeIndeks for x in listaPolja]
-    najcesciIndeks = max(listaIndeks, key=listaIndeks.count)
+    if len(listaIndeks) > 0:
+        najcesciIndeks = max(listaIndeks, key=listaIndeks.count)
+    else:
+        najcesciIndeks = -1
 
     context = {
         'winRateLeader':winRateL,
