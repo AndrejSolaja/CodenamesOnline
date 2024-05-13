@@ -64,7 +64,7 @@ def newset(request):
                 s.reci.add(r)
 
             context = {
-                'setName': setName,
+                'setNameSuccess': setName,
                 'success_msg' : ' set was successfully created!',
                 'name_error':'',
                 'word_error': '',
@@ -81,18 +81,32 @@ def profile(request):
     korisnik = Korisnik.objects.filter(username=request.user.username).first()
 
     # izracunavanje i zaokruzivanje korisnickog Win Rate za obe uloge iz baze
-    winRateL = int(korisnik.broj_pobeda_leader /korisnik.broj_partija_leader * 100)
-    winRateG = int(korisnik.broj_pobeda_guesser / korisnik.broj_partija_guesser * 100)
+    if korisnik.broj_pobeda_leader == 0:
+        winRateL = 0
+    else:
+        winRateL = int(korisnik.broj_pobeda_leader /korisnik.broj_partija_leader * 100)
+
+    if korisnik.broj_pobeda_guesser == 0:
+        winRateG = 0
+    else:
+        winRateG = int(korisnik.broj_pobeda_guesser / korisnik.broj_partija_guesser * 100)
 
     # izdvajanja omiljene reci iz baze
     listaAsocijacija = Asocijacija.objects.filter(user_id = korisnik.id).all()
     listaReci = [str(x.zadataRec) for x in listaAsocijacija]
-    najcescaRec = max(listaReci, key=listaReci.count)
+    if len(listaReci) > 0:
+        najcescaRec = max(listaReci, key=listaReci.count)
+    else:
+        najcescaRec = ''
+
 
     # izdvajanje omiljenog polja za pogadjanje iz baze
     listaPolja = Pogadjanje.objects.filter(user_id = korisnik.id).all()
     listaIndeks = [x.poljeIndeks for x in listaPolja]
-    najcesciIndeks = max(listaIndeks, key=listaIndeks.count)
+    if len(listaIndeks) > 0:
+        najcesciIndeks = max(listaIndeks, key=listaIndeks.count)
+    else:
+        najcesciIndeks = -1
 
     context = {
         'winRateLeader':winRateL,
