@@ -18,7 +18,59 @@ def login_req(request):
 
 def newset(request):
     if request.method=="POST":
-        pass
+        words = request.POST['words_input']
+        wordList = words.split(',')
+        setName = request.POST['name_input']
+
+        # provera da li u bazi postoji ime koje je zadato
+        listaSetovaReciIstogImena = SetReci.objects.filter(naziv=setName).all()
+        if len(listaSetovaReciIstogImena) > 0:
+            # Vec postoji to ime
+            context = {
+                'setName': setName,
+                'words' : words,
+                'name_error': 'There already exists a set with that name.',
+            }
+
+            return render(request, 'home/newSet.html', context)
+        elif setName == "":
+            # Nije uneto ime seta
+            context = {
+                'setName': setName,
+                'words': words,
+                'name_error': 'There is no set name. Please enter a name for you word set.',
+            }
+
+            return render(request, 'home/newSet.html', context)
+        elif len(wordList) < 31:
+            # Nije uneto dovoljno reci, ostaviti mu upisane
+            context = {
+                'setName': setName,
+                'words': words,
+                'word_error': 'Not enough words! The minimum is 31.',
+            }
+
+            return render(request, 'home/newSet.html', context)
+        else:
+            # Sve u redu, sacuvati info u bazi
+
+            s = SetReci(naziv=setName)
+            s.save()
+
+            # Cuvamo reci u bazi -> tek nakon sto je rec sacuvana moze da se poveze sa setom Reci
+            for word in wordList:
+                r = Rec(rec = word)
+                r.save()
+                s.reci.add(r)
+
+            context = {
+                'setName': setName,
+                'success_msg' : ' set was successfully created!',
+                'name_error':'',
+                'word_error': '',
+            }
+
+            return render(request, 'home/newSet.html', context)
     else:
 
         return render(request, 'home/newSet.html')

@@ -261,3 +261,8 @@
 #word_error{
     color: #d1002a;
 }
+
+#success_msg{
+    font-size: larger;
+    color: #038000;
+}
