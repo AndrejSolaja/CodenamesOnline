@@ -36,7 +36,7 @@
             <ul class="nav nav-pills ml-auto">
                 {% if user.is_authenticated %}
                     <li class="nav-item">
-                        <a class="nav-link active bg-warning" href='/profile'><i class="fa fa-user"></i> {{ user.name }}</a>
+                        <a class="nav-link active bg-warning" href='/profile'><i class="fa fa-user"></i> {{ user.username }}</a>
                     </li>
                 {% else %}
                     <li class="nav-item">
@@ -50,7 +50,7 @@
 
                 {% if user.is_authenticated %}
                     <li class="nav-item">
-                        <a class="nav-link active bg-danger" href="Home.html"><i class="fa fa-sign-out"></i></a>
+                        <a class="nav-link active bg-danger" href='/logout'><i class="fa fa-sign-out"></i></a>
                     </li>
                 {% endif %}
             </ul>

@@ -14,7 +14,7 @@
 {% endblock %}
 
 {% block body %}
-    <div id = "new-set-form" class="container bg-light">
+    <form method="POST" id = "new-set-form" class="container bg-light">
         <!-- <form> -->
             <div class="form-group">
               <label for="nameInput" class="font-weight-bold h3">Name: </label>
@@ -29,9 +29,10 @@
             </div>
            
             <div class="container text-center">
-                <button onclick="send_set()" class="btn btn-success font-weight-bold">SEND</button>
+{#                <button onclick="send_set()" class="btn btn-success font-weight-bold">SEND</button>#}
+                <input type="submit" class="btn btn-success font-weight-bold" value="SEND">
             </div>
           <!-- </form> -->
-    </div>
+    </form>
 {% endblock %}
 

@@ -10,7 +10,7 @@
 {% endblock %}
 
 {% block js_script %}
-	<script src="{% static 'js/script.js' %}" defer></script>
+{#	<script src="{% static 'js/script.js' %}" defer></script>#}
 {% endblock %}
 
 {% block body %}
@@ -18,7 +18,7 @@
         <div id="profile-username-display">
             <span id="profile-username">
                 <i class="fa fa-user fa-2x"></i>
-                {{ user.name }}
+                {{ user.username }}
             </span>
         </div>
     </div>
@@ -72,7 +72,7 @@
             <div id="" class="container col-12 text-center">
                 <span class="font-weight-bold h4">Favorite Word</span>
                 <div id="profile-favorite-word-display">
-                    <span id="profile-favorite-word">SMOOTHIE</span>
+                    <span id="profile-favorite-word">{{ favoriteWord }}</span>
                 </div>
                 <hr>
             </div>
@@ -81,12 +81,101 @@
             <div class="cotainer col-12 text-center">
                 <span class="font-weight-bold h4">Favorite Tile:</span>
                 <div id="profile-favorite-tile-display">
-                    {% if image == 0 %}
+                    {% if favoriteTile == 0 %}
                         <img id="profile-favorite-tile" src="{% static "resources/favorite_tile/0.png" %}" alt="" style="height: 300px;">
+                    {% elif  favoriteTile == 1%}
+                        <img id="profile-favorite-tile" src="{% static "resources/favorite_tile/1.png" %}" alt="" style="height: 300px;">
+                    {% elif  favoriteTile == 2%}
+                        <img id="profile-favorite-tile" src="{% static "resources/favorite_tile/2.png" %}" alt="" style="height: 300px;">
+                    {% elif  favoriteTile == 3%}
+                        <img id="profile-favorite-tile" src="{% static "resources/favorite_tile/3.png" %}" alt="" style="height: 300px;">
+                    {% elif  favoriteTile == 4%}
+                        <img id="profile-favorite-tile" src="{% static "resources/favorite_tile/4.png" %}" alt="" style="height: 300px;">
+                    {% elif  favoriteTile == 5%}
+                        <img id="profile-favorite-tile" src="{% static "resources/favorite_tile/5.png" %}" alt="" style="height: 300px;">
+                    {% elif favoriteTile == 6 %}
+                        <img id="profile-favorite-tile" src="{% static "resources/favorite_tile/6.png" %}" alt="" style="height: 300px;">
+                    {% elif  favoriteTile == 7%}
+                        <img id="profile-favorite-tile" src="{% static "resources/favorite_tile/7.png" %}" alt="" style="height: 300px;">
+                    {% elif  favoriteTile == 8%}
+                        <img id="profile-favorite-tile" src="{% static "resources/favorite_tile/8.png" %}" alt="" style="height: 300px;">
+                    {% elif  favoriteTile == 9%}
+                        <img id="profile-favorite-tile" src="{% static "resources/favorite_tile/9.png" %}" alt="" style="height: 300px;">
+                    {% elif  favoriteTile == 10%}
+                        <img id="profile-favorite-tile" src="{% static "resources/favorite_tile/10.png" %}" alt="" style="height: 300px;">
+                    {% elif  favoriteTile == 11%}
+                        <img id="profile-favorite-tile" src="{% static "resources/favorite_tile/11.png" %}" alt="" style="height: 300px;">
+                    {% elif  favoriteTile == 12%}
+                        <img id="profile-favorite-tile" src="{% static "resources/favorite_tile/12.png" %}" alt="" style="height: 300px;">
+                    {% elif  favoriteTile == 13%}
+                        <img id="profile-favorite-tile" src="{% static "resources/favorite_tile/13.png" %}" alt="" style="height: 300px;">
+                    {% elif  favoriteTile == 14%}
+                        <img id="profile-favorite-tile" src="{% static "resources/favorite_tile/14.png" %}" alt="" style="height: 300px;">
+                    {% elif  favoriteTile == 15%}
+                        <img id="profile-favorite-tile" src="{% static "resources/favorite_tile/15.png" %}" alt="" style="height: 300px;">
+                    {% elif favoriteTile == 16 %}
+                        <img id="profile-favorite-tile" src="{% static "resources/favorite_tile/16.png" %}" alt="" style="height: 300px;">
+                    {% elif  favoriteTile == 17%}
+                        <img id="profile-favorite-tile" src="{% static "resources/favorite_tile/17.png" %}" alt="" style="height: 300px;">
+                    {% elif  favoriteTile == 18%}
+                        <img id="profile-favorite-tile" src="{% static "resources/favorite_tile/18.png" %}" alt="" style="height: 300px;">
+                    {% elif  favoriteTile == 19%}
+                        <img id="profile-favorite-tile" src="{% static "resources/favorite_tile/19.png" %}" alt="" style="height: 300px;">
+                    {% elif  favoriteTile == 20%}
+                        <img id="profile-favorite-tile" src="{% static "resources/favorite_tile/20.png" %}" alt="" style="height: 300px;">
+                    {% elif  favoriteTile == 21%}
+                        <img id="profile-favorite-tile" src="{% static "resources/favorite_tile/21.png" %}" alt="" style="height: 300px;">
+                    {% elif  favoriteTile == 22%}
+                        <img id="profile-favorite-tile" src="{% static "resources/favorite_tile/22.png" %}" alt="" style="height: 300px;">
+                    {% elif  favoriteTile == 23%}
+                        <img id="profile-favorite-tile" src="{% static "resources/favorite_tile/23.png" %}" alt="" style="height: 300px;">
+                    {% elif  favoriteTile == 24%}
+                        <img id="profile-favorite-tile" src="{% static "resources/favorite_tile/24.png" %}" alt="" style="height: 300px;">
                     {% endif %}
                 </div>
             </div>
         </div>
     </div>
+
+<script>
+    let circularProgress1 = document.querySelector("#profile-circ1"),
+    progressValue1 = document.querySelector("#profile-c-val1");
+
+    let progressStartValue1 = 0,
+    progressEndValue1 = {{ winRateLeader }},
+    speed = 25;
+
+    let progress1 = setInterval(() => {
+        progressStartValue1++;
+
+        progressValue1.textContent = `${progressStartValue1}%`;
+        circularProgress1.style.background = `conic-gradient(#d1002a ${progressStartValue1 * 3.6}deg, #ededed  0deg)`;
+
+        if(progressStartValue1 == progressEndValue1){
+            clearInterval(progress1);
+        }
+
+    }, speed);
+
+
+
+    let circularProgress2 = document.querySelector("#profile-circ2"),
+    progressValue2 = document.querySelector("#profile-c-val2");
+
+    let progressStartValue2 = 0,
+    progressEndValue2 = {{ winRateGuesser }};
+
+    let progress2 = setInterval(() => {
+        progressStartValue2++;
+
+        progressValue2.textContent = `${progressStartValue2}%`;
+        circularProgress2.style.background = `conic-gradient(#0023e8 ${progressStartValue2 * 3.6}deg, #ededed  0deg)`;
+
+        if(progressStartValue2 == progressEndValue2){
+            clearInterval(progress2);
+        }
+
+    }, speed);
+</script>
 {% endblock %}
 

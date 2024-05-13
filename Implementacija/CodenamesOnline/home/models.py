@@ -33,6 +33,7 @@ class Rec(models.Model):
         db_table = 'rec'
 class SetReci(models.Model):
     naziv = models.CharField(max_length=50, unique=True, null=True)
+    active = models.BooleanField(null=False, default=False)
     reci = models.ManyToManyField(Rec)
     class Meta:
         db_table = 'setReci'
