@@ -27,7 +27,7 @@
                 {% csrf_token %}
                 <div id="admin-active-set"class="container">
                     <span id="admin-active-set-display"class="font-weight-bold">
-                        Active Set: 
+                        Active Set:
                     </span>
                     <span id="admin-active-set-name">
                         {{ activeSet.naziv }}
@@ -39,17 +39,12 @@
                         {% for set in sets %}
                         	{% if set.active == 1 %}
                                 <input name="select_set" type='submit' value = '{{ set.naziv }}' class="list-group-item list-group-item-action" disabled>
+                            {% elif set.id == selected_set%}
+                                <input name="select_set" type='submit' value = '{{ set.naziv }}' class="list-group-item list-group-item-action list-group-item-info">
                             {% else %}
                                 <input name="select_set" type='submit' value = '{{ set.naziv }}' class="list-group-item list-group-item-action">
                         	{% endif %}
                         {% endfor %}
-
-{#                        <button class="list-group-item list-group-item-action list-group-item-info">Default Set 1</button>#}
-{#                        <button onclick="unsaved_change()" class="list-group-item list-group-item-action">Default Set 2</button>#}
-{#                        <button onclick="unsaved_change()" class="list-group-item list-group-item-action">Smešne reči</button>#}
-{#                        <button onclick="unsaved_change()" class="list-group-item list-group-item-action">Markove reci</button>#}
-{#                        <button onclick="unsaved_change()" class="list-group-item list-group-item-action">Moj set</button>#}
-{#                        <button onclick="unsaved_change()" class="list-group-item list-group-item-action">Haha kul word set</button>#}
                     </div>
                 </form>
             </div>
@@ -59,18 +54,18 @@
                     {% csrf_token %}
                     <div class="form-group">
                         <label for="nameInput" class="font-weight-bold">Name: </label>
-                        <input class="form-control" id="admin-name-input" value="" disabled>
+                        <input class="form-control" id="admin-name-input" value="{{ set_name }}" >
 {#                        <input class="form-control" id="admin-name-input" value="Default Set 1">#}
                     </div>
                     <div class="form-group">
                         <label for="wordsInput" class="font-weight-bold">Words:</label>
-                        <textarea class="form-control" id="admin-word-input" rows="5" disabled></textarea>
+                        <textarea class="form-control" id="admin-word-input" rows="5" >{{ set_words }}</textarea>
                     </div>
-                
+
                     <div id="admin-buttons" class="container">
-                        <button type="submit" onclick = "activate_set()" class="btn btn-warning font-weight-bold" disabled>ACTIVATE</button>
-                        <button type="submit" onclick = "change()" class="btn btn-success font-weight-bold" disabled>CHANGE</button>
-                        <button type="submit" onclick = "remove_set()" class="btn btn-danger font-weight-bold" disabled>DELETE</button>
+                        <button type="submit" onclick = "activate_set()" class="btn btn-warning font-weight-bold" >ACTIVATE</button>
+                        <button type="submit" onclick = "change()" class="btn btn-success font-weight-bold" >CHANGE</button>
+                        <button type="submit" onclick = "remove_set()" class="btn btn-danger font-weight-bold" >DELETE</button>
                     </div>
                 </form>
             </div>

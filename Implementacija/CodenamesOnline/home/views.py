@@ -106,7 +106,7 @@ def newset(request):
         else:
             # Sve u redu, sacuvati info u bazi
 
-            s = SetReci(naziv=setName)
+            s = SetReci(naziv=setName, kreator=request.user)
             s.save()
 
             # Cuvamo reci u bazi -> tek nakon sto je rec sacuvana moze da se poveze sa setom Reci
@@ -132,41 +132,44 @@ def profile(request):
     # dohvatanje ID korisnika
     korisnik = Korisnik.objects.filter(username=request.user.username).first()
 
-    # izracunavanje i zaokruzivanje korisnickog Win Rate za obe uloge iz baze
-    if korisnik.broj_pobeda_leader == 0:
-        winRateL = 0
+    if korisnik.is_superuser == 1:
+        return redirect('adminPage')
     else:
-        winRateL = int(korisnik.broj_pobeda_leader /korisnik.broj_partija_leader * 100)
+        # izracunavanje i zaokruzivanje korisnickog Win Rate za obe uloge iz baze
+        if korisnik.broj_pobeda_leader == 0:
+            winRateL = 0
+        else:
+            winRateL = int(korisnik.broj_pobeda_leader /korisnik.broj_partija_leader * 100)
 
-    if korisnik.broj_pobeda_guesser == 0:
-        winRateG = 0
-    else:
-        winRateG = int(korisnik.broj_pobeda_guesser / korisnik.broj_partija_guesser * 100)
+        if korisnik.broj_pobeda_guesser == 0:
+            winRateG = 0
+        else:
+            winRateG = int(korisnik.broj_pobeda_guesser / korisnik.broj_partija_guesser * 100)
 
-    # izdvajanja omiljene reci iz baze
-    listaAsocijacija = Asocijacija.objects.filter(user_id = korisnik.id).all()
-    listaReci = [str(x.zadataRec) for x in listaAsocijacija]
-    if len(listaReci) > 0:
-        najcescaRec = max(listaReci, key=listaReci.count)
-    else:
-        najcescaRec = ''
+        # izdvajanja omiljene reci iz baze
+        listaAsocijacija = Asocijacija.objects.filter(user_id = korisnik.id).all()
+        listaReci = [str(x.zadataRec) for x in listaAsocijacija]
+        if len(listaReci) > 0:
+            najcescaRec = max(listaReci, key=listaReci.count)
+        else:
+            najcescaRec = ''
 
 
-    # izdvajanje omiljenog polja za pogadjanje iz baze
-    listaPolja = Pogadjanje.objects.filter(user_id = korisnik.id).all()
-    listaIndeks = [x.poljeIndeks for x in listaPolja]
-    if len(listaIndeks) > 0:
-        najcesciIndeks = max(listaIndeks, key=listaIndeks.count)
-    else:
-        najcesciIndeks = -1
+        # izdvajanje omiljenog polja za pogadjanje iz baze
+        listaPolja = Pogadjanje.objects.filter(user_id = korisnik.id).all()
+        listaIndeks = [x.poljeIndeks for x in listaPolja]
+        if len(listaIndeks) > 0:
+            najcesciIndeks = max(listaIndeks, key=listaIndeks.count)
+        else:
+            najcesciIndeks = -1
 
-    context = {
-        'winRateLeader':winRateL,
-        'winRateGuesser':winRateG,
-        'favoriteTile' : najcesciIndeks,
-        'favoriteWord':najcescaRec
-    }
-    return render(request, 'home/profile.html', context)
+        context = {
+            'winRateLeader':winRateL,
+            'winRateGuesser':winRateG,
+            'favoriteTile' : najcesciIndeks,
+            'favoriteWord':najcescaRec
+        }
+        return render(request, 'home/profile.html', context)
 
 def recovery(request):
     return render(request, 'home/recovery.html')
