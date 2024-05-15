@@ -19,6 +19,10 @@
 
 .selected {background-color: rgba(187, 177, 177, 0.303) }
 
+.suppress-color {
+    background-color: inherit !important;
+}
+
 body {
     background-image: url('../resources/background_image1.jpg');
     

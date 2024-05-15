@@ -25,20 +25,20 @@
   <div class="row">
     <div class="col">
       <div class="d-flex justify-content-center">
-          <table>
-            <tr>
-                <td><div class="box" id="box1">Zamak</div></td>
-                <td><div class="box" id="box2">Hleb</div></td>
-                <td><div class="box" id="box3">Nebo</div></td>
-                <td><div class="box" id="box4">Jastuk</div></td>
-            </tr>
-            <tr>
-                <td><div class="box" id="box6">Koza</div></td>
-                <td><div class="box" id="box7">Primirije</div></td>
-                <td><div class="box" id="box8">Crna</div></td>
-                <td><div class="box" id="box9">Loptica</div></td>
-            </tr>
-          </table>
+        <table>
+          {% for word in words %}
+                {% if forloop.counter0|divisibleby:5 or forloop.first %}
+                    <tr>
+                {% endif %}
+                <td>
+                  <div class="box" id="box{{ forloop.counter }}">{{ word.rec }}</div>
+                </td>
+
+                {% if forloop.counter0|add:1|divisibleby:5 or forloop.last %}
+                    </tr>
+                {% endif %}
+            {% endfor %}
+        </table>
       </div>
     </div>
   </div>

@@ -10,7 +10,12 @@
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 {% endblock %}
 
+
+
 {% block js_script %}
+    <script>
+        var word_dict = {{ words|safe }};
+    </script>
 	<script src="{% static 'js/pogadjanjePojma.js' %}" defer></script>
 {% endblock %}
 
@@ -26,41 +31,21 @@
     <div class="col">
       <div class="d-flex justify-content-center">
           <table>
-            <tr>
-                <td><div class="box" id="box1">Zamak</div></td>
-                <td><div class="box" id="box2">Hleb</div></td>
-                <td><div class="box" id="box3">Nebo</div></td>
-                <td><div class="box" id="box4">Jastuk</div></td>
-                <td><div class="box" id="box5">Olovka</div></td>
-            </tr>
-            <tr>
-                <td><div class="box" id="box6">Koza</div></td>
-                <td><div class="box" id="box7">Primirije</div></td>
-                <td><div class="box" id="box8">Crna</div></td>
-                <td><div class="box" id="box9">Loptica</div></td>
-                <td><div class="box" id="box10">Kosarka</div></td>
-            </tr>
-            <tr>
-                <td><div class="box" id="box11">Jastreb</div></td>
-                <td><div class="box" id="box12">Albanija</div></td>
-                <td><div class="box" id="box13">Tenk</div></td>
-                <td><div class="box" id="box14">Doktor</div></td>
-                <td><div class="box" id="box15">Zloban</div></td>
-            </tr>
-            <tr>
-                <td><div class="box" id="box16">Jevrej</div></td>
-                <td><div class="box" id="box17">Muzika</div></td>
-                <td><div class="box" id="box18">Strela</div></td>
-                <td><div class="box" id="box19">Metal</div></td>
-                <td><div class="box" id="box20">Novčanik</div></td>
-            </tr>
-            <tr>
-                <td><div class="box" id="box21">Gumica</div></td>
-                <td><div class="box" id="box22">Medved</div></td>
-                <td><div class="box" id="box23">Kompjuter</div></td>
-                <td><div class="box" id="box24">Misao</div></td>
-                <td><div class="box" id="box25">Cement</div></td>
-            </tr>
+            {% for key, value in words.items %}
+                {% if forloop.counter0|divisibleby:5 or forloop.first %}
+                    <tr>
+                {% endif %}
+                
+                <td>
+                    {% with color=value.0 %}
+                        <div class="box {{ color }}" id="box{{ forloop.counter }}">{{ key }}</div>
+                    {% endwith %}
+                </td>
+
+                {% if forloop.counter0|add:1|divisibleby:5 or forloop.last %}
+                    </tr>
+                {% endif %}
+            {% endfor %}
           </table>
       </div>
     </div>
