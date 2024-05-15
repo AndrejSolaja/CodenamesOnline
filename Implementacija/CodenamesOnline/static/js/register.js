@@ -13,36 +13,6 @@ const regex = new RegExp("[a-zA-Z].*@[a-zA-Z]+");
 function onClick()
 {
     updateColors();
-
-    if(!username_field.value.localeCompare("")
-        || !password_field.value.localeCompare("")
-        || !email_field.value.localeCompare("")
-        || !password_confirmed_field.value.localeCompare(""))
-    {
-        return;
-    }
-
-    if(!regex.test(email_field.value)){
-        error_box.style.display = "inline";
-        error_box.innerHTML = "Incorrect email!";
-        return;
-    }
-
-    if(password_field.value.localeCompare(password_confirmed_field.value)){
-        error_box.style.display = "inline";
-        error_box.innerHTML = "Passwords do not match!";
-        return;
-    }
-
-    if(!attempted){
-        attempted = true;
-        error_box.style.display = "inline";
-        error_box.innerHTML = "Username already exists!";
-    }
-    else{
-        window.location.href = "HomeLoggedIn.html";
-    }
-
 }
 
 function updateColors()
@@ -66,6 +36,15 @@ function updateUColors()
 
 function updateEColors()
 {
+    if(!email_field.value.localeCompare(""))
+    {
+        email_field.classList.remove("emailNotEmpty");
+    }
+    else
+    {
+        email_field.classList.add("emailNotEmpty");
+    }
+    
     if(!email_field.value.localeCompare("") || !regex.test(email_field.value))
     {
         email_field.style.borderColor = "red";

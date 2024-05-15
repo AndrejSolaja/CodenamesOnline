@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
 
-from home.forms import KorisnikLoginForm
+from home.forms import KorisnikRegisterForm, KorisnikLoginForm
 
 from home.models import *
 
@@ -175,7 +175,30 @@ def recovery(request):
     return render(request, 'home/recovery.html')
 
 def register(request):
-    return render(request, 'home/register.html')
+    
+    if request.method=="POST":
+        form = KorisnikRegisterForm(request.POST)
+
+        if form.is_valid():
+            form.save()
+
+            login(request, Korisnik.objects.filter(username=form.clean()["username"]).first())
+
+            return redirect('home')
+        else:
+            context = {
+                'form': form
+            }
+
+            return render(request, 'home/register.html', context)
+    else:
+        form = KorisnikRegisterForm()
+
+        context = {
+            'form': form
+        }
+
+        return render(request, 'home/register.html', context)
 
 def rules(request):
     return render(request, 'home/rules.html')

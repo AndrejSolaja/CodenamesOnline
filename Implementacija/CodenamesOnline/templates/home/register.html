@@ -15,31 +15,43 @@
 
 {% block body %}
     <main>
-        <div class="block">
+        <form class="block" method="post">
             <p> Register </p>
 
             <div style="padding: 10px; padding-bottom: 15px;">
                 <p id="errorMsg"></p>
             </div>
 
+            {% csrf_token %}
+
+            <div style="padding: 10px; padding-bottom: 15px;">
+                <p id="errorMsg">{{ errorMessage }}</p>
+            </div>
             <label>
-                <input id="username" type="text" class="textfield" onchange="updateUColors()" required>
-                <span class="placeholder">Username</span>
-            </label>
-            <label>
-                <input id="email" type="text" class="textfield" onchange="updateEColors()" required>
-                <span class="placeholder">Email</span>
-            </label>
-            <label>
-                <input id="password" type="password" class="textfield" onchange="updatePColors()" required>
-                <span class="placeholder">Password</span>
-            </label>
-            <label>
-                <input id="password_confirmed" type="password" class="textfield" onchange="updatePCColors()" required>
-                <span class="placeholder">Confirmed password</span>
+                {{ form.username }}
+                <span class="placeholder" for="{{ form.username.id_for_label }}">Username</span>
+                {{ form.username.errors }}
             </label>
 
-            <button class="active bg-danger" style="width: 100%;" onclick="onClick()">Register</button>
+            <label>
+                {{ form.email }}
+                <span class="placeholder" for="{{ form.email.id_for_label }}">Email</span>
+                {{ form.email.errors }}
+            </label>
+
+            <label>                
+                {{ form.password1 }}
+                <span class="placeholder" for="{{ form.password1.id_for_label }}">Password</span>
+                {{ form.password1.errors }}
+            </label>
+
+            <label>                
+                {{ form.password2 }}
+                <span class="placeholder" for="{{ form.password2.id_for_label }}">Confirmed password</span>
+                {{ form.password2.errors }}
+            </label>
+
+            <button type="submit" class="active bg-danger" style="width: 100%;" onclick="onClick()">Register</button>
         </div>
     </main>
 {% endblock %}
