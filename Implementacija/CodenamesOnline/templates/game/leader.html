@@ -13,7 +13,7 @@
 {% block js_script %}
 	<script src="{% static 'js/zadavanjeAsocijacija.js' %}" defer></script>
     <script>
-        var word_dict = {{ words|safe }}
+        var word_dict = {{ gamestate.words|safe }}
     </script>
     
 {% endblock %}
@@ -22,7 +22,7 @@
 <div class="container mt-5 bg-light main">
   <div class="row text-center">
     <div class="col">
-      <h1>Think of a word!</h1>
+      <h1>Think of a clue!</h1>
     </div>
     
   </div>
@@ -31,7 +31,7 @@
       <div class="d-flex justify-content-center">
         <div class="board">
           <table>
-            {% for key, value in words.items %}
+            {% for key, value in gamestate.game_words.items %}
                 {% if forloop.counter0|divisibleby:5 or forloop.first %}
                     <tr>
                 {% endif %}
@@ -54,22 +54,26 @@
   </div>
 
   <div class="row centered mt-3"> 
-        <form>
+        <form method="post">
+            {% csrf_token %}
           <div class="container row align-items-center text-center">
           <div class="col">
-            <label for="input1">Word:</label>
+            <label for="{{ form.clue.id_for_label }}">{{ form.clue.label }}:</label>
           </div>
           <div class="col">
-            <input type="text" class="form-control" id="input1" >
+              {{ form.clue }}
+{#            <input type="text" class="form-control" id="input1" >#}
           </div>
           <div class="col">
-            <label for="input2">Number of Tiles:</label>
+            <label for="{{ form.clue_num.id_for_label }}">{{ form.clue_num.label}}:</label>
           </div>
           <div class="col">
-            <input type="number" class="form-control" id="input2" min="1" value="1">
+              {{ form.clue_num }}
+{#            <input type="number" class="form-control" id="input2" min="1" value="1">#}
           </div>
           <div class="col">
-            <button type="submit" class="btn btn-primary" onclick="skoci()">Give Word</button>
+{#            <button type="submit" class="btn btn-primary" onclick="skoci()">Give Word</button>#}
+              <input type="submit" class="btn btn-primary">
           </div>
           </div>
         </form>    

@@ -14,7 +14,7 @@
 
 {% block js_script %}
     <script>
-        var word_dict = {{ words|safe }};
+        var word_dict = {{ gamestate.game_words|safe }};
     </script>
 	<script src="{% static 'js/pogadjanjePojma.js' %}" defer></script>
 {% endblock %}
@@ -23,7 +23,7 @@
 <div class="container mt-5 bg-light main">
   <div class="row text-center">
     <div class="col">
-      <h1>WORD: Mekano 2</h1>
+      <h1>CLUE: {{ gamestate.clue }} {{ gamestate.clue_num }}</h1>
     </div>
 
   </div>
@@ -31,7 +31,7 @@
     <div class="col">
       <div class="d-flex justify-content-center">
           <table>
-            {% for key, value in words.items %}
+            {% for key, value in gamestate.game_words.items %}
                 {% if forloop.counter0|divisibleby:5 or forloop.first %}
                     <tr>
                 {% endif %}
@@ -54,10 +54,10 @@
   <div class="row centered mt-3">
     <div class="container row align-items-center text-center">
       <div class="col">
-        <button type="submit" class="btn btn-primary " onclick="checkColor()">GUESS</button>
+        <button type="submit" class="btn btn-primary " onclick="guess()">GUESS</button>
       </div>
       <div class="col">
-        <button type="submit" class="btn btn-primary " onclick="checkColor()">End Turn</button>
+        <button type="submit" class="btn btn-primary " onclick="guess()">End Turn</button>
       </div>
     </div>
   </div>

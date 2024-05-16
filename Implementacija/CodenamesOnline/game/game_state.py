@@ -6,6 +6,8 @@ class GameState:
     game_words = {}
     remaining_words = []
     is_game_init = False
+    clue = ""
+    clue_num = 0
 
     @staticmethod
     def init_words():

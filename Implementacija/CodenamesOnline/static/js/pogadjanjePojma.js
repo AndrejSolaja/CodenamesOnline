@@ -4,6 +4,7 @@
 
 var id_color = {};
 var box_selected = "0";
+var guessed_words = []
 
 document.addEventListener('DOMContentLoaded', function() {
   let boxes = document.querySelectorAll('.box');
@@ -39,10 +40,14 @@ document.addEventListener('DOMContentLoaded', function() {
 
 });
 
-function checkColor() {
+function guess() {
   let box = document.getElementById(box_selected);
   box.classList.remove("selected");
   box.classList.add(id_color[box.id]);
-  word_dict[box.innerHTML][1] = 1
+  word_dict[box.innerHTML][1] = 1;
+  guessed_words.push(box.innerHTML)
+
+    // TODO LOGIC for checking is he guessing correctly
 }
-    
+
+
