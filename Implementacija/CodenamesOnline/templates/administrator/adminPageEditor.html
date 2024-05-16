@@ -62,10 +62,15 @@
                         <textarea name='set_words' class="form-control" id="admin-word-input" rows="5" >{{ set_words }}</textarea>
                     </div>
 
+                    <div>
+                        <p style="color: #da071a; font-size: large">{{ error_message }}</p>
+                        <p style="color: #069900; font-size: large">{{ success_message }}</p>
+                    </div>
+
                     <div id="admin-buttons" class="container">
-                        <input type="submit" name="activate_set" class="btn btn-warning font-weight-bold" value="ACTIVATE">
-                        <input type="submit"  name = "change_set" class="btn btn-success font-weight-bold" value="CHANGE" >
-                        <input type="submit" name = "delete_set "class="btn btn-danger font-weight-bold" value="DELETE">
+                        <input type="submit" name="activate_set" class="btn btn-warning font-weight-bold" value="ACTIVATE" onclick="return confirm('Are you sure that you want to activate this set?')">
+                        <input type="submit"  name = "change_set" class="btn btn-success font-weight-bold" value="CHANGE" onclick="return confirm('Are you sure that you want to make changes to the words in this set?')">
+                        <input type="submit" name = "delete_set" class="btn btn-danger font-weight-bold" value="DELETE" onclick="return confirm('Are you sure that you want to remove this set?')">
                     </div>
                 </form>
             </div>

@@ -23,6 +23,8 @@ function activate_set(){
     var ret_val = confirm("Are you sure that you want to activate this set?")
     if (ret_val == true){
         alert("You successfully activated the set.")
+        return true;
     }
+    return false;
     
 }

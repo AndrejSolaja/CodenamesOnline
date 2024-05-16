@@ -1,8 +1,10 @@
 from django.http import Http404
 from django.shortcuts import render, redirect
 from home.models import *
+from django.contrib.auth.decorators import user_passes_test
 # Create your views here.
 
+@user_passes_test(lambda u: u.is_superuser)
 def adminPage(request):
     sets = SetReci.objects.all()
     activeSet = SetReci.objects.filter(active=True).first()
@@ -21,11 +23,10 @@ def adminPage(request):
         }
 
         return render(request, 'administrator/adminPage.html', context)
-
+@user_passes_test(lambda u: u.is_superuser)
 def adminSetEditor(request, set_id):
 
     if request.method == 'POST':
-
         if 'activate_set' in request.POST: #request.POST['activate_set'][0] == 'ACTIVATE'
             try:
                 set = SetReci.objects.filter(id=set_id)
@@ -51,26 +52,46 @@ def adminSetEditor(request, set_id):
                 setWords = [x.rec for x in set.reci.all()]
                 setWords = ','.join(setWords)
 
-                print(set.naziv)
-                print(request.POST['set_name'])
-
-                print(request.POST['set_words'])
-                print(setWords)
-
                 if (set.naziv != request.POST['set_name']) or (setWords != request.POST['set_words']):
                     set = SetReci.objects.filter(id=set_id)
-                    # TODO: provera da li postoji ovo ime u bazi
+                    # provera da li postoji ovo ime u bazi, a promenjeno je
+                    if (set.first().naziv != request.POST['set_name']) and (len(SetReci.objects.filter(naziv=request.POST['set_name'])) > 0):
+                        context = {
+                            'activeSet': activeSet,
+                            'sets': sets,
+                            'selected_set': set_id,
+                            'set_name': set.first().naziv,
+                            'set_words': setWords,
+                            'error_message':'There already exists a set with that name.'
+                        }
+
+                        return render(request, 'administrator/adminPageEditor.html', context)
+
                     set.update(naziv=request.POST['set_name'])
 
                     set = set.first()
+
+
+                    # dodavanje reci iz forme
+                    # Provera da li postoji dovoljno unetih reci
+                    wordList = request.POST['set_words'].split(',')
+
+                    if len(wordList) < 31:
+                        context = {
+                            'activeSet': activeSet,
+                            'sets': sets,
+                            'selected_set': set_id,
+                            'set_name': set.naziv,
+                            'set_words': ','.join(wordList),
+                            'error_message': 'Not enough words! The minimum is 31.'
+                        }
+
+                        return render(request, 'administrator/adminPageEditor.html', context)
+
                     # Brisanje reci iz baze
                     reciZaBrisanje = set.reci.all()
                     reciZaBrisanje.delete()
                     set.reci.clear()
-
-                    # dodavanje reci iz forme
-                    # TODO: Provera da li postoji dovoljno unetih reci
-                    wordList = request.POST['set_words'].split(',')
                     for word in wordList:
                         r = Rec(rec = word)
                         r.save()
@@ -84,41 +105,37 @@ def adminSetEditor(request, set_id):
                         'sets': sets,
                         'selected_set': set_id,
                         'set_name': set.naziv,
-                        'set_words': setWords
+                        'set_words': setWords,
+                        'success_message':"Successfully applied changes!"
                     }
 
                     return render(request, 'administrator/adminPageEditor.html', context)
                 else:
-                    #TODO: Ne primenjuje se nijedna promena, nije uneta nijedna promena
+                    # Ne primenjuje se nijedna promena, nije uneta nijedna promena
 
                     context = {
                         'activeSet': activeSet,
                         'sets': sets,
                         'selected_set': set_id,
                         'set_name': set.naziv,
-                        'set_words': setWords
+                        'set_words': setWords,
+                        'error_message': "You didn't make any changes."
                     }
 
                     return render(request, 'administrator/adminPageEditor.html', context)
             except SetReci.DoesNotExist:
                 raise Http404("Set does not exist")
         elif 'delete_set' in request.POST:
+
             try:
-                set = SetReci.objects.get(id=set_id)
-                sets = SetReci.objects.all()
-                activeSet = SetReci.objects.filter(active=True).first()
-                setWords = [x.rec for x in set.reci.all()]
-                setWords = ','.join(setWords)
+                set = SetReci.objects.filter(id=set_id)
 
-                context = {
-                    'activeSet': activeSet,
-                    'sets': sets,
-                    'selected_set': set_id,
-                    'set_name': set.naziv,
-                    'set_words': setWords
-                }
+                reci = set.first().reci.all()
+                reci.delete()
+                set.first().reci.clear()
+                set.delete()
 
-                return render(request, 'administrator/adminPageEditor.html', context)
+                return redirect('adminPage')
             except SetReci.DoesNotExist:
                 raise Http404("Set does not exist")
         else:

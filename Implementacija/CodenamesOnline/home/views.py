@@ -68,6 +68,7 @@ def login_req(request):
 
         return render(request, 'home/login.html', context)
 
+@login_required(login_url='login')
 def newset(request):
     if request.method=="POST":
         words = request.POST['words_input']
@@ -127,6 +128,7 @@ def newset(request):
 
         return render(request, 'home/newSet.html')
 
+@login_required(login_url='login')
 def profile(request):
 
     # dohvatanje ID korisnika
