@@ -15,20 +15,22 @@
 
 {% block body %}
     <main>
-        <div class="block">
+        <form class="block" method="post">
+            {% csrf_token %}
             <p> Password recovery </p>
 
             <div style="padding: 10px; padding-bottom: 15px;">
-                <p id="errorMsg"></p>
+                <p id="errorMsg">{{ errorMessage }}</p>
             </div>
 
             <label>
-                <input id="username" type="text" class="textfield" onchange="updateUColors()" required>
-                <span class="placeholder">Username</span>
+                {{ form.username }}
+                <span class="placeholder" for="{{ form.username.id_for_label }}">Username</span>
+                {{ form.username.errors }}
             </label>
 
             <button class="active bg-danger" style="width: 100%;" onclick="onClick()">Send</button>
-        </div>
+        </form>
     </main>
 {% endblock %}
 

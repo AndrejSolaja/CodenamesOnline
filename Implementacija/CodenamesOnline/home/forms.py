@@ -1,11 +1,26 @@
 from datetime import datetime
 from django.contrib.auth.forms import AuthenticationForm, UsernameField, UserCreationForm
 from django import forms
-from django.forms import ValidationError
+from django.forms import ValidationError, Form
 
 from home.models import Korisnik
 
 from django.contrib.auth import get_user_model
+
+class PasswordRecoveryForm(Form):
+    def __init__(self, *args, **kwargs):
+        super(PasswordRecoveryForm, self).__init__(*args, **kwargs)
+    username = UsernameField(widget=forms.TextInput(
+        attrs={
+            'class': 'textfield',
+            'placeholder': '',
+            'id': 'username_email',
+            'onchange': 'updateUColors()'
+        }
+    ))
+
+    class Meta:
+        fields = ["username"]
 
 class KorisnikLoginForm(AuthenticationForm):
     def __init__(self, *args, **kwargs):

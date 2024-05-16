@@ -1,10 +1,17 @@
+from typing import LiteralString
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
 
-from home.forms import KorisnikRegisterForm, KorisnikLoginForm
+from home.forms import KorisnikRegisterForm, KorisnikLoginForm, PasswordRecoveryForm
 
 from home.models import *
+
+from django.core.mail import send_mail
+from django.conf import settings
+
+import string
+import secrets
 
 # Create your views here.
 
@@ -174,7 +181,36 @@ def profile(request):
         return render(request, 'home/profile.html', context)
 
 def recovery(request):
-    return render(request, 'home/recovery.html')
+
+    if request.method == "POST":
+
+        user = Korisnik.objects.filter(username=request.POST["username"]).first()
+
+        if user is None:
+            context = {
+                'form': PasswordRecoveryForm(),
+                'errorMessage': "User does not exist"
+            }
+
+            return render(request, 'home/recovery.html', context=context)
+        
+        newPassword = ''.join(secrets.choice(string.ascii_letters + string.digits) for i in range(16))
+
+        plainMessage = f"Hi {user.get_username()}!\n\nYour new password is {newPassword}.\n\nKind regards,\nTeam at Codenames,\nImposters Inc."
+        htmlMessage = f"<header><h2>Hi {user.get_username()}!</h2></header><br><main>Your new password is {newPassword}</main><br><footer>Kind regards,<br>Team at Codenames,<br>Imposters Inc.</footer>"
+
+        send_mail(subject="[CodeNames] Password recovery", message=plainMessage, html_message=htmlMessage, from_email=settings.EMAIL_HOST_USER, recipient_list=[user.email])
+
+        user.set_password(newPassword)
+        user.save()
+
+        return redirect('home')
+    
+    context = {
+        'form': PasswordRecoveryForm()
+    }
+
+    return render(request, 'home/recovery.html', context=context)
 
 def register(request):
     
