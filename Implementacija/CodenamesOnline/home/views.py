@@ -16,6 +16,14 @@ import secrets
 # Create your views here.
 
 def home(request):
+    """
+    Display the home page for the website. This is where every user group starts. Any user can decide to press play and join the game.
+    The header is dynamic, and changes based on whether a user is logged in or not.
+
+    **Template:**
+
+    :template:`CodenamesOnline/templates/home/index.html`
+    """
     return render(request, 'home/index.html')
 
 def logout_req(request):
@@ -24,7 +32,7 @@ def logout_req(request):
 
 def login_req(request):
     """
-    Display a login page and authenticate user :model:`CodenamesOnline.Korisnik`.
+    Display a login page and authenticate user :model:`home.Korisnik`.
 
     **Context**
 
@@ -77,6 +85,27 @@ def login_req(request):
 
 @login_required(login_url='login')
 def newset(request):
+    """
+    Display a page for creating a new :model:`home.SetReci`. It has a form with 2 input areas with its constraints written on the page.
+
+    **Context**
+
+    ``setName``
+        User input text field for :model:`home.SetReci`.naziv
+    ``words``
+        User input text area for :model:`home.SetReci`.reci
+    ``name_error``
+        Displays a message if the setName already exists in the databasae, or if it wasn't filled out in the form.
+    ``word_error``
+        Displays a message if there are less than 31 words, separated by a comma, written in the words text area.
+    ``success_msg``
+        Displays a message for a successful creation of a new :model:`home.SetReci`
+    ``setNameSuccess``
+        Displays the name of the successfully created :model:`home.SetReci`
+    **Template:**
+
+    :template:`CodenamesOnline/templates/home/newSet.html`
+    """
     if request.method=="POST":
         words = request.POST['words_input']
         wordList = words.split(',')
@@ -137,7 +166,30 @@ def newset(request):
 
 @login_required(login_url='login')
 def profile(request):
+    """
+    Display a user specific profile page. The information which the user can see is: Winning percentage when playig as a leader, Winning percentage when playig as a guesser, Favorite clue word and a Favorite tile to guess.
+    Admin can use this page to re-enter his /administrator page.
+    A different profile page is based on which user is currently logged in when it was entered.
 
+    **Context**
+
+            'winRateLeader':winRateL,
+            'winRateGuesser':winRateG,
+            'favoriteTile' : najcesciIndeks,
+            'favoriteWord':najcescaRec
+    ``winRateLeader``
+        Displayes a circle representing the winning percentage when playig as a leader.
+    ``winRateGuesser``
+        Displayes a circle representing the winning percentage when playig as a guesser.
+    ``favoriteWord``
+        Displays a word which was used the most times for giving a clue to the guesser.
+    ``favoriteTile``
+        Displays a picture of the 5x5 board, where the highlighted tile is considered the favorite, based on the amount of times it was guessed.
+
+    **Template:**
+
+    :template:`CodenamesOnline/templates/home/profile.html`
+    """
     # dohvatanje ID korisnika
     korisnik = Korisnik.objects.filter(username=request.user.username).first()
 

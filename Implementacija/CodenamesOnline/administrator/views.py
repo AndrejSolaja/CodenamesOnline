@@ -4,8 +4,22 @@ from home.models import *
 from django.contrib.auth.decorators import user_passes_test
 # Create your views here.
 
-@user_passes_test(lambda u: u.is_superuser)
+@user_passes_test(lambda u: u.is_superuser, login_url='login')
 def adminPage(request):
+    """
+    Displays main page for the admin. He can choose which :model:`home.SetReci' to edit.
+
+    **Context**
+
+    ``activeSet``
+        SetReci which is active and is going to be used to generate words for the game.
+    ``sets``
+        Every SetReci in the database, displayed in a clickable list.
+
+    **Template:**
+
+    :template:`CodenamesOnline/templates/administrator/adminPage.html`
+    """
     sets = SetReci.objects.all()
     activeSet = SetReci.objects.filter(active=True).first()
 
@@ -23,9 +37,33 @@ def adminPage(request):
         }
 
         return render(request, 'administrator/adminPage.html', context)
-@user_passes_test(lambda u: u.is_superuser)
+@user_passes_test(lambda u: u.is_superuser, login_url='login')
 def adminSetEditor(request, set_id):
+    """
+    Displays :model:`home.SetReci', its words and its name. The admin can edit its name and words.
+    Admin can choose which set to activate for the upcoming games.
 
+    **Context**
+
+    ``activeSet``
+        SetReci which is active and is going to be used to generate words for the game.
+    ``sets``
+        Every SetReci in the database, displayed in a clickable list.
+    ``selected_set``
+        The changes are being made to the set who's name was previously selected from the list. Its ID is in the url.
+    ``set_name``
+        Selected set's name.
+    ``set_words``
+        Selected set's words.
+    ``error_message``
+        In case of an invalid input (too few words, or there already exists a set with that name) a message is displayed underneath the form.
+    ``success_messsage``
+        In case of a properly applied change, a message is displayed in green signifying a successful change.
+
+    **Template:**
+
+    :template:`CodenamesOnline/templates/administrator/adminPageEditor.html`
+    """
     if request.method == 'POST':
         if 'activate_set' in request.POST: #request.POST['activate_set'][0] == 'ACTIVATE'
             try:
