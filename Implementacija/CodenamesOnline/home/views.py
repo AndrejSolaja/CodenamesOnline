@@ -233,7 +233,20 @@ def profile(request):
         return render(request, 'home/profile.html', context)
 
 def recovery(request):
+    """
+    Display a password recovery page, reset password of user :model:`home.Korisnik` and send a mail with the user's new password to the user's email address.
 
+    **Context**
+
+    ``form``
+        A password recovery form.
+    ``errorMessage``
+        An error message to be displayed.
+
+    **Template:**
+
+    :template:`CodenamesOnline/templates/home/recovery.html`
+    """
     if request.method == "POST":
 
         user = Korisnik.objects.filter(username=request.POST["username"]).first()
