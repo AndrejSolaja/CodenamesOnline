@@ -278,7 +278,20 @@ def recovery(request):
     return render(request, 'home/recovery.html', context=context)
 
 def register(request):
-    
+    """
+    Display a registration page and create a new user :model:`home.Korisnik`.
+
+    **Context**
+
+    ``form``
+        A registration form.
+    ``errorMessages``
+        Error messages to be displayed.
+
+    **Template:**
+
+    :template:`CodenamesOnline/templates/home/register.html`
+    """
     if request.method=="POST":
         form = KorisnikRegisterForm(request.POST)
 
@@ -289,8 +302,12 @@ def register(request):
 
             return redirect('home')
         else:
+
+            errorMessages = form['password2'].errors.as_text().split("*")
+
             context = {
-                'form': form
+                'form': form,
+                'errorMessages':  errorMessages,
             }
 
             return render(request, 'home/register.html', context)
