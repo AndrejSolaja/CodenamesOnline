@@ -12,6 +12,10 @@
 
 {% block js_script %}
 	<script src="{% static 'js/reroll.js' %}" defer></script>
+    <script>
+        const word_dict = {{ gamestate.game_words|safe }};
+        const remaining_words = {{ gamestate.remaining_words|safe }};
+    </script>
 {% endblock %}
 
 {% block body %}
@@ -26,14 +30,19 @@
     <div class="col">
       <div class="d-flex justify-content-center">
         <table>
-          {% for word in words %}
+          {% for key, value in specific_player_words.items %}
                 {% if forloop.counter0|divisibleby:5 or forloop.first %}
                     <tr>
                 {% endif %}
-                <td>
-                  <div class="box" id="box{{ forloop.counter }}">{{ word.rec }}</div>
-                </td>
-
+              
+                {% with color=value.0 %}
+                    {% if color == "red" %}
+                    <td>
+                        <div class="box {{ color }}" id="box{{ forloop.counter }}">{{ key }}</div>
+                    </td>
+                    {% else %}
+                    {% endif %}
+                {% endwith %}
                 {% if forloop.counter0|add:1|divisibleby:5 or forloop.last %}
                     </tr>
                 {% endif %}

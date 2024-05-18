@@ -4,9 +4,11 @@ from game.forms import ClueForm
 from home.models import Asocijacija
 from django.shortcuts import redirect
 
+
 # Create your views here.
 def teamSelect(request):
     return render(request, 'game/teamSelect.html')
+
 
 def guesser(request):
     if not GameState.is_game_init:
@@ -16,6 +18,7 @@ def guesser(request):
         'gamestate': GameState
     }
     return render(request, 'game/guesser.html', context)
+
 
 def leader(request):
     if not GameState.is_game_init:
@@ -41,9 +44,17 @@ def leader(request):
     }
     return render(request, 'game/leader.html', context)
 
+
 def reroll(request):
-    return render(request, 'game/reroll.html')
+    if not GameState.is_game_init:
+        GameState.init_words()
 
+    # Logika koji igrac igra za default neka bude red
+    specific_player_words = {key: value for key, value in GameState.game_words.items() if value[0] == "red"}
 
+    context = {
+        'specific_player_words': specific_player_words,
+        'gamestate': GameState
+    }
 
-
+    return render(request, 'game/reroll.html', context)

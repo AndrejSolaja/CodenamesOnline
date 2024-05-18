@@ -13,7 +13,7 @@
 {% block js_script %}
 	<script src="{% static 'js/zadavanjeAsocijacija.js' %}" defer></script>
     <script>
-        var word_dict = {{ gamestate.words|safe }}
+        var word_dict = {{ gamestate.game_words|safe }}
     </script>
     
 {% endblock %}
