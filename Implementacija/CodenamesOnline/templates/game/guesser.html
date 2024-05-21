@@ -20,7 +20,8 @@
 {% endblock %}
 
 {% block body %}
-<div class="container mt-5 bg-light main">
+    <div id="guesser-wrapper">
+<div class="container mt-5 bg-light main" id="guesser-game-area">
   <div class="row text-center">
     <div class="col">
       <h1>CLUE: {{ gamestate.clue }} {{ gamestate.clue_num }}</h1>
@@ -63,5 +64,6 @@
   </div>
 
 </div>
+    </div>
 {% endblock %}
 

@@ -9,6 +9,12 @@ from django.shortcuts import redirect
 def teamSelect(request):
     return render(request, 'game/teamSelect.html')
 
+def victory(request):
+    context = {
+        'teamWon' : 'Blue'
+    }
+    return render(request, 'game/victory.html', context)
+
 
 def guesser(request):
     if not GameState.is_game_init:

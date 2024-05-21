@@ -102,7 +102,6 @@ def adminSetEditor(request, set_id):
                             'set_words': setWords,
                             'error_message':'There already exists a set with that name.'
                         }
-
                         return render(request, 'administrator/adminPageEditor.html', context)
 
                     set.update(naziv=request.POST['set_name'])
