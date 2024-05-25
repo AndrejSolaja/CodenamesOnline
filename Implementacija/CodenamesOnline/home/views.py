@@ -65,7 +65,11 @@ def login_req(request):
                 return render(request, 'home/login.html', context)
             else:
                 login(request,user)
-                return redirect('home')
+
+                if user.is_superuser:
+                    return redirect('administrator/')
+                else:
+                    return redirect('home')
         else:
             context = {
                 'errorMessage': "Credentials are invalid.",
