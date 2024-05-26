@@ -8,6 +8,14 @@ class GameState:
     is_game_init = False
     clue = ""
     clue_num = 0
+    turn = 2
+    # 0 -> reroll Blue (istovremeno)
+    # 1 -> reroll Read (istovremeno)
+    # 2 -> Blue leader
+    # 3 -> Blue guesser
+    # 4 -> Red leader
+    # 5 -> Red guesser
+    # 6 -> victory screen
 
     @staticmethod
     def init_words():

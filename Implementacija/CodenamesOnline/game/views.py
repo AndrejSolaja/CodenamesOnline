@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404
 from game.game_state import GameState
 from game.forms import ClueForm
-from home.models import Asocijacija
+from home.models import *
 from django.shortcuts import redirect
 
 
@@ -17,6 +17,7 @@ def victory(request):
 
 
 def guesser(request):
+
     if not GameState.is_game_init:
         GameState.init_words()
 
@@ -27,8 +28,17 @@ def guesser(request):
 
 
 def leader(request):
+
     if not GameState.is_game_init:
         GameState.init_words()
+
+    # TEAM DOHVATITI IZ COOKIES
+    team = 'blue'
+    myTurn = False
+    if (GameState.turn == 2) and (team == 'blue'):
+        myTurn = True
+    elif (GameState.turn == 4) and (team == 'red'):
+        myTurn = True
 
     if request.method == "POST":
         form = ClueForm(request.POST)
@@ -39,14 +49,19 @@ def leader(request):
             GameState.clue = clue
             GameState.clue_num = clue_num
 
-            # Dodati u bazu za asoc
+            # Dodati u bazu za asoc -> SAMO AKO JE KORISNIK ULOGOVAN
+            if request.user != None:
+                pass
 
-            return redirect('guesser')
+            GameState.turn = 3
+
+            return redirect('leader')
     else:
         form = ClueForm()
     context = {
         'gamestate': GameState,
-        'form': form
+        'form': form,
+        'myTurn':myTurn
     }
     return render(request, 'game/leader.html', context)
 
