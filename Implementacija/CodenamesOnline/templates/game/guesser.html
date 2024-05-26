@@ -20,50 +20,82 @@
 {% endblock %}
 
 {% block body %}
-    <div id="guesser-wrapper">
-<div class="container mt-5 bg-light main" id="guesser-game-area">
-  <div class="row text-center">
-    <div class="col">
-      <h1>CLUE: {{ gamestate.clue }} {{ gamestate.clue_num }}</h1>
+<div class="container" id="guesser-wrapper">
+    <div class="row">
+        <div class="container col-2 bg-light main guesser-game-area">
+            <div class="row">
+                <span style="color: #af0000; font-size: x-large; font-weight: 650; margin-bottom: 10px">Red clues:</span>
+            </div>
+            <div class="row bg-white main" style="height: 90%;  box-shadow: 0px 3px 3px black; padding: 15px; font-weight: 500;">
+                <ul class="no-bullets">
+                  <li>Balls, 3</li>
+                  <li>Idea, 2</li>
+                </ul>
+            </div>
+        </div>
+
+
+
+        <div class="col-8">
+            <div class="container bg-light main guesser-game-area">
+              <div class="row text-center">
+                <div class="col">
+                  <h1>CLUE: {{ gamestate.clue }} {{ gamestate.clue_num }}</h1>
+                </div>
+
+              </div>
+              <div class="row">
+                <div class="col">
+                  <div class="d-flex justify-content-center">
+                      <table>
+                        {% for key, value in gamestate.game_words.items %}
+                            {% if forloop.counter0|divisibleby:5 or forloop.first %}
+                                <tr>
+                            {% endif %}
+
+                            <td>
+                                {% with color=value.0 %}
+                                    <div class="box {{ color }}" id="box{{ forloop.counter }}">{{ key }}</div>
+                                {% endwith %}
+                            </td>
+
+                            {% if forloop.counter0|add:1|divisibleby:5 or forloop.last %}
+                                </tr>
+                            {% endif %}
+                        {% endfor %}
+                      </table>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row centered mt-3">
+                <div class="container row align-items-center text-center">
+                  <div class="col">
+                    <button type="submit" class="btn btn-primary " onclick="guess()">GUESS</button>
+                  </div>
+                  <div class="col">
+                    <button type="submit" class="btn btn-primary " onclick="guess()">End Turn</button>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+        </div>
+
+        <div class="container col-2  bg-light main guesser-game-area">
+            <div class="row">
+                <span style="color: #0101b6; font-size: x-large; font-weight: 650; margin-bottom: 10px">Blue clues:</span>
+            </div>
+            <div class="row bg-white main" style="height: 90%;  box-shadow: 0px 3px 3px black; padding: 15px; font-weight: 500;">
+                <ul class="no-bullets">
+                  <li>Coffee, 3</li>
+                  <li>Tea, 2</li>
+                  <li>Coca Cola, 1</li>
+                </ul>
+            </div>
+        </div>
+
     </div>
-
-  </div>
-  <div class="row">
-    <div class="col">
-      <div class="d-flex justify-content-center">
-          <table>
-            {% for key, value in gamestate.game_words.items %}
-                {% if forloop.counter0|divisibleby:5 or forloop.first %}
-                    <tr>
-                {% endif %}
-                
-                <td>
-                    {% with color=value.0 %}
-                        <div class="box {{ color }}" id="box{{ forloop.counter }}">{{ key }}</div>
-                    {% endwith %}
-                </td>
-
-                {% if forloop.counter0|add:1|divisibleby:5 or forloop.last %}
-                    </tr>
-                {% endif %}
-            {% endfor %}
-          </table>
-      </div>
-    </div>
-  </div>
-
-  <div class="row centered mt-3">
-    <div class="container row align-items-center text-center">
-      <div class="col">
-        <button type="submit" class="btn btn-primary " onclick="guess()">GUESS</button>
-      </div>
-      <div class="col">
-        <button type="submit" class="btn btn-primary " onclick="guess()">End Turn</button>
-      </div>
-    </div>
-  </div>
-
 </div>
-    </div>
 {% endblock %}
 
