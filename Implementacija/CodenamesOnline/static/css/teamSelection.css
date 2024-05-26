@@ -41,7 +41,7 @@ main{
     width: 100%;
 }
 
-.teamBlockButtons button{
+.teamBlockButtons input{
     width: 100%;
     margin-bottom: 30px;
     height: 100px;
@@ -86,7 +86,7 @@ main{
     background-color: #03015c48;
 }
 
-.teamBlock:nth-child(1) button{
+.teamBlock:nth-child(1) input{
     /* background-image: linear-gradient(to bottom right, #EE7911, #d62912); */
     background-color: darkred;
     border: none;
@@ -106,7 +106,7 @@ main{
     color:rgb(152, 152, 152);
 }
 
-.teamBlock:nth-child(2) button{
+.teamBlock:nth-child(2) input{
     /* background-image: linear-gradient(to bottom right, #1913EC, #16119c); */
     background-color: #16119c;
     border: none;

@@ -29,8 +29,17 @@
             </textarea>
 
             <div class="teamBlockButtons">
-                <button id="b1" onclick="lider1()">Join as leader</button>
-                <button id="b2" onclick="igrac1()">Join as user</button>
+                <form action="/game/" method="post">
+                    {% csrf_token %}
+                    <input type="hidden" name="playerId" value="0">
+                    <input type="submit" id="0" value="Join as leader">
+                </form>
+
+                <form action="/game/" method="post">
+                    {% csrf_token %}
+                    <input type="hidden" name="playerId" value="1">
+                    <input type="submit" id="1" value="Join as user">
+                </form>
             </div>
 
             <h2>DEFAULT SET</h2>
@@ -49,8 +58,17 @@
             </textarea>
 
             <div class="teamBlockButtons">
-                <button id="b3" onclick="lider2()">Join as leader</button>
-                <button id="b4" onclick="igrac2()">Join as user</button>
+                <form action="/game/" method="post">
+                    {% csrf_token %}
+                    <input type="hidden" name="playerId" value="2">
+                    <input type="submit" id="2" value="Join as leader">
+                </form>
+
+                <form action="/game/" method="post">
+                    {% csrf_token %}
+                    <input type="hidden" name="playerId" value="3">
+                    <input type="submit" id="3" value="Join as user">
+                </form>
             </div>
 
             <h2>DEFAULT SET</h2>

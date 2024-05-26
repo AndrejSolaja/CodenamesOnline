@@ -17,6 +17,11 @@ class GameState:
     # 5 -> Red guesser
     # 6 -> victory screen
 
+    redLeaderId = None
+    redGuesserId = None
+    blueLeaderId = None
+    blueGuesserId = None
+
     @staticmethod
     def init_words():
         print("Initializing game words...")

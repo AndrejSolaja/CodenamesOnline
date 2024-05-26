@@ -1,12 +1,88 @@
 from django.shortcuts import render, get_object_or_404
 from game.game_state import GameState
-from game.forms import ClueForm
+from game.forms import ClueForm, TeamSelect
 from home.models import *
 from django.shortcuts import redirect
 
+from django.http import HttpResponse
+import json
+
+import uuid
+
+def generateId(request):
+
+    if request.user.is_authenticated:
+        return request.user.id
+
+    return uuid.uuid4().hex
+
+def getId(request):
+    if request.user.is_authenticated:
+        return request.user.id
+
+    if 'playerIdentifier' in request.COOKIES.keys():
+        return uuid.UUID(request.COOKIES['playerIdentifier']).hex
+
+    return None
+
+def players(request):        
+    return HttpResponse(
+            json.dumps([GameState.redLeaderId != None, GameState.redGuesserId != None, GameState.blueLeaderId != None, GameState.blueGuesserId != None]),
+            content_type="application/json")
 
 # Create your views here.
 def teamSelect(request):
+
+    if not GameState.is_game_init:
+        GameState.init_words()
+
+    playerId = getId(request)
+
+    if playerId != None:
+        if GameState.redLeaderId == playerId or GameState.blueLeaderId == playerId:
+            return redirect("leader")
+        elif GameState.redGuesserId == playerId or GameState.blueGuesserId == playerId:
+            return redirect("guesser")
+
+    if request.method == "POST":
+
+        form = TeamSelect(request.POST)
+
+        if(form.is_valid()):
+            playerId = form.cleaned_data['playerId']
+
+            generatedId = generateId(request)
+
+            redirectLocation = ""
+
+            if playerId == 0:
+                if GameState.redLeaderId != None:
+                    return render(request, 'game/teamSelect.html')
+                GameState.redLeaderId = generatedId
+                redirectLocation = "leader"
+            elif playerId == 1:
+                if GameState.redGuesserId != None:
+                    return render(request, 'game/teamSelect.html')
+                GameState.redGuesserId = generatedId
+                redirectLocation = "guesser"
+            elif playerId == 2:
+                if GameState.blueLeaderId != None:
+                    return render(request, 'game/teamSelect.html')
+                GameState.blueLeaderId = generatedId
+                redirectLocation = "leader"
+            else:
+                if GameState.blueGuesserId != None:
+                    return render(request, 'game/teamSelect.html')
+                GameState.blueGuesserId = generatedId
+                redirectLocation = "guesser"            
+        
+            response = redirect(redirectLocation)
+
+            if not request.user.is_authenticated:
+                response.set_cookie("playerIdentifier", generatedId)
+
+            return response
+
     return render(request, 'game/teamSelect.html')
 
 def victory(request):
