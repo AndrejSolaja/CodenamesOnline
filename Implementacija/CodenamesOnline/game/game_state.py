@@ -8,7 +8,7 @@ class GameState:
     is_game_init = False
     clue = ""
     clue_num = 0
-    turn = 2
+    turn = 3
     # 0 -> reroll Blue (istovremeno)
     # 1 -> reroll Read (istovremeno)
     # 2 -> Blue leader

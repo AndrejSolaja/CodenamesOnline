@@ -4,7 +4,7 @@ from game.forms import ClueForm, TeamSelect
 from home.models import *
 from django.shortcuts import redirect
 
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseForbidden
 import json
 
 import uuid
@@ -97,6 +97,41 @@ def guesser(request):
     if not GameState.is_game_init:
         GameState.init_words()
 
+    # odredjivanje tima na osnovu requesta
+    if request.user.id == None:
+        if GameState.blueGuesserId == request.COOKIES['playerIdentifier']:
+            team = 'blue'
+        elif GameState.redGuesserId == request.COOKIES['playerIdentifier']:
+            team = 'red'
+        else:
+            return HttpResponseForbidden('You are not allowed inside this game.')
+    else:
+        if GameState.blueGuesserId == request.user.id:
+            team = 'blue'
+        elif GameState.redGuesserId == request.user.id:
+            team = 'red'
+        else:
+            return HttpResponseForbidden('You are not allowed inside this game.')
+
+
+    if request.method == "POST":
+        data = json.loads(request.body.decode('utf-8')) # dobija se indeks 1 do 25
+        tile_index = int(data['tileIndex'].replace("box",""))-1 # prebacuje na 0 - 24 indeks
+        print(tile_index)
+
+        if request.user.id != None:
+            pogadjanje = Pogadjanje(user = request.user, poljeIndeks=tile_index)
+            pogadjanje.save()
+
+        if team == 'blue':
+            GameState.turn = 4
+        elif team == 'red':
+            # TODO:: logika da li je pogodjeno tacno ili ne treba da se oslikava i ovde, da li se prebacuje na victory screen ili na Blue leader
+            GameState.turn = 2
+
+        # Reload se radi nakon sto stigne response od post metode
+        return HttpResponse(json.dumps({"done":True}))
+
     context = {
         'gamestate': GameState
     }
@@ -108,8 +143,23 @@ def leader(request):
     if not GameState.is_game_init:
         GameState.init_words()
 
-    # TEAM DOHVATITI IZ COOKIES
-    team = 'blue'
+    # odredjivanje tima na osnovu requesta
+    if request.user.id == None:
+        if GameState.blueLeaderId == request.COOKIES['playerIdentifier']:
+            team = 'blue'
+        elif GameState.redLeaderId == request.COOKIES['playerIdentifier']:
+            team = 'red'
+        else:
+            return HttpResponseForbidden('You are not allowed inside this game.')
+    else:
+        if GameState.blueLeaderId == request.user.id:
+            team = 'blue'
+        elif GameState.redLeaderId == request.user.id:
+            team = 'red'
+        else:
+            return HttpResponseForbidden('You are not allowed inside this game.')
+
+
     myTurn = False
     if (GameState.turn == 2) and (team == 'blue'):
         myTurn = True
@@ -126,10 +176,14 @@ def leader(request):
             GameState.clue_num = clue_num
 
             # Dodati u bazu za asoc -> SAMO AKO JE KORISNIK ULOGOVAN
-            if request.user != None:
-                pass
+            if request.user.id != None:
+                asoc = Asocijacija(user=request.user, zadataRec=clue)
+                asoc.save()
 
-            GameState.turn = 3
+            if team == 'blue':
+                GameState.turn = 3
+            elif team == 'red':
+                GameState.turn = 5
 
             return redirect('leader')
     else:
@@ -145,6 +199,22 @@ def leader(request):
 def reroll(request):
     if not GameState.is_game_init:
         GameState.init_words()
+
+    # odredjivanje tima na osnovu requesta
+    if request.user.id == None:
+        if GameState.blueLeaderId == request.COOKIES['playerIdentifier']:
+            team = 'blue'
+        elif GameState.redLeaderId == request.COOKIES['playerIdentifier']:
+            team = 'red'
+        else:
+            return HttpResponseForbidden('You are not allowed inside this game.')
+    else:
+        if GameState.blueLeaderId == request.user.id:
+            team = 'blue'
+        elif GameState.redLeaderId == request.user.id:
+            team = 'red'
+        else:
+            return HttpResponseForbidden('You are not allowed inside this game.')
 
     # Logika koji igrac igra za default neka bude red
     specific_player_words = {key: value for key, value in GameState.game_words.items() if value[0] == "red"}

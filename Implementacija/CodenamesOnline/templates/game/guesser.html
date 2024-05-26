@@ -71,10 +71,22 @@
               <div class="row centered mt-3">
                 <div class="container row align-items-center text-center">
                   <div class="col">
-                    <button type="submit" class="btn btn-primary " onclick="guess()">GUESS</button>
+                  
+                      {% if gamestate.turn != 3 %}
+                        <button type="submit" class="btn btn-primary " disabled onclick="guess()">GUESS</button>  
+                      {% else %}
+                        <button type="submit" class="btn btn-primary " onclick="guess()">GUESS</button>
+                      {% endif %}
+                    
                   </div>
                   <div class="col">
-                    <button type="submit" class="btn btn-primary " onclick="guess()">End Turn</button>
+                      {% if gamestate.turn != 3 %}
+                        <button type="submit" class="btn btn-primary " disabled onclick="guess()">End Turn</button>
+                      {% else %}
+                        <button type="submit" class="btn btn-primary " onclick="guess()">End Turn</button>      
+                      {% endif %}
+                      
+                    
                   </div>
                 </div>
               </div>
