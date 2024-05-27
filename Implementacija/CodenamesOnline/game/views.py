@@ -116,18 +116,39 @@ def guesser(request):
 
     if request.method == "POST":
         data = json.loads(request.body.decode('utf-8')) # dobija se indeks 1 do 25
-        tile_index = int(data['tileIndex'].replace("box",""))-1 # prebacuje na 0 - 24 indeks
-        print(tile_index)
+        action = data['action']
+        if action == 'guess':
 
-        if request.user.id != None:
-            pogadjanje = Pogadjanje(user = request.user, poljeIndeks=tile_index)
-            pogadjanje.save()
+            tile_index = int(data['tileIndex'].replace("box",""))-1 # prebacuje na 0 - 24 indeks
+            guessed_word = data['guessed_word']
+            guessed_color = GameState.game_words[guessed_word][0]
+            GameState.game_words[guessed_word][1] = 1  # Set to guessed
+            print("GUESSED COLOR:", guessed_color)
+            print(tile_index)
 
-        if team == 'blue':
-            GameState.turn = 4
-        elif team == 'red':
-            # TODO:: logika da li je pogodjeno tacno ili ne treba da se oslikava i ovde, da li se prebacuje na victory screen ili na Blue leader
-            GameState.turn = 2
+            if request.user.id != None:
+                pogadjanje = Pogadjanje(user = request.user, poljeIndeks=tile_index)
+                pogadjanje.save()
+
+            if guessed_color == team:
+                # Moze ponovo guess
+                pass
+            elif guessed_color == "black":
+                # Kraj igre, tim gubi
+                pass
+                # TODO Render victory screen
+            else:
+                # Kraj poteza
+                if team == 'blue':
+                    GameState.turn = 4
+                elif team == 'red':
+                    GameState.turn = 2
+
+        elif action == 'end_guess':
+            if team == 'blue':
+                GameState.turn = 4
+            elif team == 'red':
+                GameState.turn = 2
 
         # Reload se radi nakon sto stigne response od post metode
         return HttpResponse(json.dumps({"done":True}))
@@ -217,7 +238,11 @@ def reroll(request):
             return HttpResponseForbidden('You are not allowed inside this game.')
 
     # Logika koji igrac igra za default neka bude red
-    specific_player_words = {key: value for key, value in GameState.game_words.items() if value[0] == "red"}
+    specific_player_words = {}
+    if team == "red":
+        specific_player_words = {key: value for key, value in GameState.game_words.items() if value[0] == "red"}
+    elif team == "blue":
+        specific_player_words = {key: value for key, value in GameState.game_words.items() if value[0] == "blue"}
 
     context = {
         'specific_player_words': specific_player_words,

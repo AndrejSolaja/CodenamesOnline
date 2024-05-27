@@ -17,6 +17,11 @@
 .white { border-color: #948f8f; }
 .black { border-color: #000000;  }
 
+.blueSelected { background-color: #3498db; border-color: #3498db; }
+.redSelected { background-color: #e74c3c; border-color: #e74c3c; }
+.whiteSelected { background-color: #948f8f; border-color: #948f8f;}
+.blackSelected { background-color: #000000; border-color: #000000; }
+
 body {
     background-image: url('../resources/background_image1.jpg');
     

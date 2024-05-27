@@ -41,6 +41,9 @@ document.addEventListener('DOMContentLoaded', function() {
   boxes.forEach(function(box) {
     box.addEventListener('click', function() {
         // This function will be executed when a box is clicked
+        if (word_dict[box.innerHTML][1] == 1) {
+            return;
+        }
         if(box_selected != 0) {
             console.log(box_selected)
           document.getElementById(box_selected).classList.remove("selected");
@@ -70,7 +73,7 @@ async function guess() {
             "Content-Type": "application/json",
             "X-CSRFToken": getCookie("csrftoken")
         },
-        body: JSON.stringify({'tileIndex': box_selected})
+        body: JSON.stringify({'tileIndex': box_selected, 'guessed_word': box.innerHTML, 'action': "guess"})
     }).then(function(response) {
         return response.json(); // Parse the JSON response
     })
@@ -88,3 +91,16 @@ async function guess() {
 
 }
 
+async function end_guess(){
+    console.log("end guess")
+    fetch(window.location.href,
+        {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "X-CSRFToken": getCookie("csrftoken")
+            },
+            body: JSON.stringify({'action': "end_guess"})
+        }
+    )
+}
