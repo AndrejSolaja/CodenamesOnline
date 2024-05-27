@@ -13,8 +13,8 @@ class GameState:
     red_clues = []
 
     turn = 2
-    # 0 -> reroll Blue (istovremeno)
-    # 1 -> reroll Read (istovremeno)
+    # 0 -> reroll Blue
+    # 1 -> reroll Read
     # 2 -> Blue leader
     # 3 -> Blue guesser
     # 4 -> Red leader

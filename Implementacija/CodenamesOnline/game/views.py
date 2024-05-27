@@ -274,6 +274,24 @@ def reroll(request):
     elif (GameState.turn == 1) and (team == 'red'):
         myTurn = True
 
+    if request.method == "POST":
+        data = json.loads(request.body.decode('utf-8'))
+        new_words = data['new_words']
+        old_words = data['old_words']
+        print('new_words:', new_words)
+        print('old_words:', old_words)
+
+        for i in range(len(new_words)):
+            del GameState.game_words[old_words[i]]
+            GameState.game_words[new_words[i]] = [team, 0]
+            GameState.remaining_words.remove(new_words[i])
+
+            if team == 'blue':
+                GameState.turn = 1
+            elif team == 'red':
+                GameState.turn = 2
+        return redirect("leader")
+
     context = {
         'specific_player_words': specific_player_words,
         'gamestate': GameState,
