@@ -28,6 +28,13 @@ class GameState:
 
     winnerTeam = None
 
+    guessed_count = {'blue': 0, 'red': 0}
+
+    BLUE_CARD_NUM = 9
+    RED_CARD_NUM = 8
+    WHITE_CARD_NUM = 7
+    BLACK_CARD_NUM = 1
+
     @staticmethod
     def init_words():
         print("Initializing game words...")
@@ -35,7 +42,7 @@ class GameState:
         words = list(active_set.reci.all())
         random.shuffle(words)
         words = [word.rec.lstrip() for word in words]
-        group_lengths = [9, 8, 7, 1]
+        group_lengths = [GameState.BLUE_CARD_NUM, GameState.RED_CARD_NUM, GameState.WHITE_CARD_NUM, GameState.BLACK_CARD_NUM]
         remaining_length = len(words) - sum(group_lengths)
 
         if remaining_length > 0:

@@ -64,7 +64,6 @@ async function guess() {
   word_dict[box.innerHTML][1] = 1;
   guessed_words.push(box.innerHTML)
 
-  // TODO LOGIC for checking is he guessing correctly
     try{
        const fetchResponse = await fetch(window.location.href,
     {
@@ -92,7 +91,7 @@ async function guess() {
 }
 
 async function end_guess(){
-    console.log("end guess")
+
     fetch(window.location.href,
         {
             method: "POST",
@@ -102,5 +101,12 @@ async function end_guess(){
             },
             body: JSON.stringify({'action': "end_guess"})
         }
-    )
+    ).then(function(response) {
+        return response.json(); // Parse the JSON response
+    }).then(function(data) {
+        // Ako je receno da je kraj poteza, treba da reloaduje?
+        console.log("end guess")
+        window.location.reload();
+
+    })
 }

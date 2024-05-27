@@ -9,12 +9,13 @@ import json
 
 import uuid
 
-def generateId(request):
 
+def generateId(request):
     if request.user.is_authenticated:
         return request.user.id
 
     return uuid.uuid4().hex
+
 
 def getId(request):
     if request.user.is_authenticated:
@@ -24,6 +25,7 @@ def getId(request):
         return uuid.UUID(request.COOKIES['playerIdentifier']).hex
 
     return None
+
 
 def getGamerTagById(playerId):
     if playerId is None:
@@ -74,7 +76,7 @@ def teamSelect(request):
 
         form = TeamSelect(request.POST)
 
-        if(form.is_valid()):
+        if (form.is_valid()):
             playerId = form.cleaned_data['playerId']
 
             generatedId = generateId(request)
@@ -100,8 +102,8 @@ def teamSelect(request):
                 if GameState.blueGuesserId != None:
                     return render(request, 'game/teamSelect.html')
                 GameState.blueGuesserId = generatedId
-                redirectLocation = REDIRECT_LINK_GUESSER        
-        
+                redirectLocation = REDIRECT_LINK_GUESSER
+
             response = redirect(redirectLocation)
 
             if not request.user.is_authenticated:
@@ -111,14 +113,16 @@ def teamSelect(request):
 
     return render(request, 'game/teamSelect.html')
 
+
 def victory(request):
     context = {
-        'teamWon' : GameState.winnerTeam
+        'teamWon': GameState.winnerTeam
     }
     return render(request, 'game/victory.html', context)
 
 
 def guesser(request):
+    print(GameState.turn)
 
     if not GameState.is_game_init:
         GameState.init_words()
@@ -139,14 +143,12 @@ def guesser(request):
         else:
             return HttpResponseForbidden('You are not allowed inside this game.')
 
-
-
     if request.method == "POST":
-        data = json.loads(request.body.decode('utf-8')) # dobija se indeks 1 do 25
+        data = json.loads(request.body.decode('utf-8'))  # dobija se indeks 1 do 25
         action = data['action']
         if action == 'guess':
 
-            tile_index = int(data['tileIndex'].replace("box",""))-1 # prebacuje na 0 - 24 indeks
+            tile_index = int(data['tileIndex'].replace("box", "")) - 1  # prebacuje na 0 - 24 indeks
             guessed_word = data['guessed_word']
             guessed_color = GameState.game_words[guessed_word][0]
             GameState.game_words[guessed_word][1] = 1  # Set to guessed
@@ -154,21 +156,26 @@ def guesser(request):
             print(tile_index)
 
             if request.user.id != None:
-                pogadjanje = Pogadjanje(user = request.user, poljeIndeks=tile_index)
+                pogadjanje = Pogadjanje(user=request.user, poljeIndeks=tile_index)
                 pogadjanje.save()
 
             if guessed_color == team:
-                # Moze ponovo guess
-                pass
+                GameState.guessed_count[team] += 1
+                # Ukoliko je poslednji pogodak kraj je igre
+                if GameState.guessed_count['blue'] == GameState.BLUE_CARD_NUM:
+                    GameState.winnerTeam = 'blue'
+                elif GameState.guessed_count['red'] == GameState.RED_CARD_NUM:
+                    GameState.winnerTeam = 'red'
+                # Moze ponovo guess posto je pogodio
             elif guessed_color == "black":
-                # Kraj igre, tim gubi
+                # Kraj igre, tim koji je pogodio crnu gubi
                 if team == 'blue':
                     GameState.winnerTeam = 'red'
                 else:
                     GameState.winnerTeam = 'blue'
                 # Render ce se vrsiti u get metodi nakon sto se pozove reload
             else:
-                # Kraj poteza
+                # Kraj poteza guessom na white
                 if team == 'blue':
                     GameState.turn = 4
                 elif team == 'red':
@@ -181,7 +188,7 @@ def guesser(request):
                 GameState.turn = 2
 
         # Reload se radi nakon sto stigne response od post metode
-        return HttpResponse(json.dumps({"done":True}))
+        return HttpResponse(json.dumps({"done": True}))
 
     myTurn = False
     if (GameState.turn == 3) and (team == 'blue'):
@@ -192,7 +199,7 @@ def guesser(request):
     if GameState.winnerTeam == None:
         context = {
             'gamestate': GameState,
-            'myTurn':myTurn,
+            'myTurn': myTurn,
         }
         return render(request, 'game/guesser.html', context)
     else:
@@ -200,6 +207,7 @@ def guesser(request):
 
 
 def leader(request):
+    print(GameState.turn)
 
     if not GameState.is_game_init:
         GameState.init_words()
@@ -220,7 +228,6 @@ def leader(request):
         else:
             return HttpResponseForbidden('You are not allowed inside this game.')
 
-
     myTurn = False
     if (GameState.turn == 2) and (team == 'blue'):
         myTurn = True
@@ -238,7 +245,7 @@ def leader(request):
 
             # Dodati clues u game state da bi mogli da se dohvate kod Guessera
             if team == 'blue':
-                GameState.blue_clues.append(clue+', ' + str(clue_num))
+                GameState.blue_clues.append(clue + ', ' + str(clue_num))
             else:
                 GameState.red_clues.append(clue + ', ' + str(clue_num))
 
@@ -260,7 +267,7 @@ def leader(request):
         context = {
             'gamestate': GameState,
             'form': form,
-            'myTurn':myTurn
+            'myTurn': myTurn
         }
         return render(request, 'game/leader.html', context)
     else:
@@ -307,22 +314,21 @@ def reroll(request):
         print('new_words:', new_words)
         print('old_words:', old_words)
 
-
         for i in range(len(new_words)):
             del GameState.game_words[old_words[i]]
             GameState.game_words[new_words[i]] = [team, 0]
             GameState.remaining_words.remove(new_words[i])
 
-            if team == 'blue':
-                GameState.turn = 1
-            elif team == 'red':
-                GameState.turn = 2
+        if team == 'blue' and GameState.turn == 0:
+            GameState.turn = 1
+        elif team == 'red' and GameState.turn == 1:
+            GameState.turn = 2
         return JsonResponse({'success': True, 'redirect_url': 'leader'})
 
     context = {
         'specific_player_words': specific_player_words,
         'gamestate': GameState,
-        'myTurn':myTurn
+        'myTurn': myTurn
     }
 
     return render(request, 'game/reroll.html', context)
