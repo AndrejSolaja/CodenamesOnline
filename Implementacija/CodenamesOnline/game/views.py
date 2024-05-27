@@ -87,7 +87,7 @@ def teamSelect(request):
 
 def victory(request):
     context = {
-        'teamWon' : 'Blue'
+        'teamWon' : GameState.winnerTeam
     }
     return render(request, 'game/victory.html', context)
 
@@ -114,6 +114,7 @@ def guesser(request):
             return HttpResponseForbidden('You are not allowed inside this game.')
 
 
+
     if request.method == "POST":
         data = json.loads(request.body.decode('utf-8')) # dobija se indeks 1 do 25
         action = data['action']
@@ -135,8 +136,11 @@ def guesser(request):
                 pass
             elif guessed_color == "black":
                 # Kraj igre, tim gubi
-                pass
-                # TODO Render victory screen
+                if team == 'blue':
+                    GameState.winnerTeam = 'red'
+                else:
+                    GameState.winnerTeam = 'blue'
+                # Render ce se vrsiti u get metodi nakon sto se pozove reload
             else:
                 # Kraj poteza
                 if team == 'blue':
@@ -153,10 +157,20 @@ def guesser(request):
         # Reload se radi nakon sto stigne response od post metode
         return HttpResponse(json.dumps({"done":True}))
 
-    context = {
-        'gamestate': GameState
-    }
-    return render(request, 'game/guesser.html', context)
+    myTurn = False
+    if (GameState.turn == 3) and (team == 'blue'):
+        myTurn = True
+    elif (GameState.turn == 5) and (team == 'red'):
+        myTurn = True
+
+    if GameState.winnerTeam == None:
+        context = {
+            'gamestate': GameState,
+            'myTurn':myTurn,
+        }
+        return render(request, 'game/guesser.html', context)
+    else:
+        return redirect('victory')
 
 
 def leader(request):
@@ -196,6 +210,12 @@ def leader(request):
             GameState.clue = clue
             GameState.clue_num = clue_num
 
+            # Dodati clues u game state da bi mogli da se dohvate kod Guessera
+            if team == 'blue':
+                GameState.blue_clues.append(clue+', ' + str(clue_num))
+            else:
+                GameState.red_clues.append(clue + ', ' + str(clue_num))
+
             # Dodati u bazu za asoc -> SAMO AKO JE KORISNIK ULOGOVAN
             if request.user.id != None:
                 asoc = Asocijacija(user=request.user, zadataRec=clue)
@@ -209,12 +229,16 @@ def leader(request):
             return redirect('leader')
     else:
         form = ClueForm()
-    context = {
-        'gamestate': GameState,
-        'form': form,
-        'myTurn':myTurn
-    }
-    return render(request, 'game/leader.html', context)
+
+    if GameState.winnerTeam == None:
+        context = {
+            'gamestate': GameState,
+            'form': form,
+            'myTurn':myTurn
+        }
+        return render(request, 'game/leader.html', context)
+    else:
+        return redirect('victory')
 
 
 def reroll(request):
@@ -244,9 +268,16 @@ def reroll(request):
     elif team == "blue":
         specific_player_words = {key: value for key, value in GameState.game_words.items() if value[0] == "blue"}
 
+    myTurn = False
+    if (GameState.turn == 0) and (team == 'blue'):
+        myTurn = True
+    elif (GameState.turn == 1) and (team == 'red'):
+        myTurn = True
+
     context = {
         'specific_player_words': specific_player_words,
-        'gamestate': GameState
+        'gamestate': GameState,
+        'myTurn':myTurn
     }
 
     return render(request, 'game/reroll.html', context)

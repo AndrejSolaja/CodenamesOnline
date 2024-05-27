@@ -15,6 +15,16 @@
     <script>
         const word_dict = {{ gamestate.game_words|safe }};
         const remaining_words = {{ gamestate.remaining_words|safe }};
+        var True = true;
+        var False = false;
+        function autoReload(){
+            var myTurn = {{ myTurn }};
+
+            if (!myTurn) {
+                location.reload()
+            }
+        }
+        setInterval(autoReload, 5000);
     </script>
 {% endblock %}
 
@@ -56,7 +66,12 @@
   <div class="row centered mt-3">
     <div class="container row align-items-center text-center">
       <div class="col">
-        <button id="re-roll-submit-button" type="submit" class="btn btn-primary " onclick="reRoll()">Re-roll</button>
+          {% if myTurn %}
+              <button id="re-roll-submit-button" type="submit" class="btn btn-primary " onclick="reRoll()">Re-roll</button>
+          {% else %}
+              <button id="re-roll-submit-button" type="submit" class="btn btn-primary " disabled onclick="reRoll()">Re-roll</button>
+          {% endif %} 
+        
       </div>
     </div>
   </div>

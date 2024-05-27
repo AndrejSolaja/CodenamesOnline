@@ -14,6 +14,16 @@
 	<script src="{% static 'js/zadavanjeAsocijacija.js' %}" defer></script>
     <script>
         var word_dict = {{ gamestate.game_words|safe }}
+        var True = true;
+        var False = false;
+        function autoReload(){
+            var myTurn = {{ myTurn }};
+
+            if (!myTurn) {
+                location.reload()
+            }
+        }
+        setInterval(autoReload, 5000);
     </script>
     
 {% endblock %}
