@@ -25,15 +25,30 @@ def getId(request):
 
     return None
 
+def getGamerTagById(playerId):
+    if playerId is None:
+        return None
+    
+    try:
+        user = Korisnik.objects.filter(id=playerId).first()
+    except:
+        return "Anonymous"
+
+    if user is None:
+        return "Anonymous"
+    
+    return user.username
+
 def players(request):        
     return HttpResponse(
-            json.dumps([GameState.redLeaderId != None, GameState.redGuesserId != None, GameState.blueLeaderId != None, GameState.blueGuesserId != None]),
+            json.dumps([getGamerTagById(GameState.redLeaderId), getGamerTagById(GameState.redGuesserId), getGamerTagById(GameState.blueLeaderId), getGamerTagById(GameState.blueGuesserId)]),
             content_type="application/json")
 
 # Create your views here.
 def teamSelect(request):
 
-    REDIRECT_LINK_LEADER = "reroll"
+    REDIRECT_LINK_REROLL = "reroll"
+    REDIRECT_LINK_LEADER = "leader"
     REDIRECT_LINK_GUESSER = "guesser"
 
     if not GameState.is_game_init:
@@ -42,8 +57,16 @@ def teamSelect(request):
     playerId = getId(request)
 
     if playerId != None:
-        if GameState.redLeaderId == playerId or GameState.blueLeaderId == playerId:
-            return redirect(REDIRECT_LINK_LEADER)
+        if GameState.redLeaderId == playerId:
+            if GameState.turn < 1:
+                return redirect(REDIRECT_LINK_REROLL)
+            else:
+                return redirect(REDIRECT_LINK_LEADER)
+        if GameState.blueLeaderId == playerId:
+            if GameState.turn < 2:
+                return redirect(REDIRECT_LINK_REROLL)
+            else:
+                return redirect(REDIRECT_LINK_LEADER)
         elif GameState.redGuesserId == playerId or GameState.blueGuesserId == playerId:
             return redirect(REDIRECT_LINK_GUESSER)
 
@@ -62,7 +85,7 @@ def teamSelect(request):
                 if GameState.redLeaderId != None:
                     return render(request, 'game/teamSelect.html')
                 GameState.redLeaderId = generatedId
-                redirectLocation = REDIRECT_LINK_LEADER
+                redirectLocation = REDIRECT_LINK_REROLL
             elif playerId == 1:
                 if GameState.redGuesserId != None:
                     return render(request, 'game/teamSelect.html')
@@ -72,7 +95,7 @@ def teamSelect(request):
                 if GameState.blueLeaderId != None:
                     return render(request, 'game/teamSelect.html')
                 GameState.blueLeaderId = generatedId
-                redirectLocation = REDIRECT_LINK_LEADER
+                redirectLocation = REDIRECT_LINK_REROLL
             else:
                 if GameState.blueGuesserId != None:
                     return render(request, 'game/teamSelect.html')
