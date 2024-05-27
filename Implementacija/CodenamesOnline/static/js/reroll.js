@@ -63,6 +63,14 @@ function reRoll() {
             body: JSON.stringify({'old_words': oldWords, 'new_words': newWords})
         }
     )
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                window.location.href = data.redirect_url;
+            }else{
+                alert('An error occurred.');
+            }
+        })
 
   selectedBoxes = [];
   newWords = [];

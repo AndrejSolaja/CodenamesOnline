@@ -4,7 +4,7 @@ from game.forms import ClueForm, TeamSelect
 from home.models import *
 from django.shortcuts import redirect
 
-from django.http import HttpResponse, HttpResponseForbidden
+from django.http import HttpResponse, HttpResponseForbidden, JsonResponse
 import json
 
 import uuid
@@ -284,6 +284,7 @@ def reroll(request):
         print('new_words:', new_words)
         print('old_words:', old_words)
 
+
         for i in range(len(new_words)):
             del GameState.game_words[old_words[i]]
             GameState.game_words[new_words[i]] = [team, 0]
@@ -293,7 +294,7 @@ def reroll(request):
                 GameState.turn = 1
             elif team == 'red':
                 GameState.turn = 2
-        return redirect("leader")
+        return JsonResponse({'success': True, 'redirect_url': 'leader'})
 
     context = {
         'specific_player_words': specific_player_words,

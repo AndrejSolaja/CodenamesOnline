@@ -47,12 +47,9 @@
                 {% endif %}
               
                 {% with color=value.0 %}
-                    {% if color == "red" %}
                     <td>
                         <div class="box {{ color }}" id="box{{ forloop.counter }}">{{ key }}</div>
                     </td>
-                    {% else %}
-                    {% endif %}
                 {% endwith %}
                 {% if forloop.counter0|add:1|divisibleby:5 or forloop.last %}
                     </tr>
