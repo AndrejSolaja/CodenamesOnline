@@ -33,6 +33,9 @@ def players(request):
 # Create your views here.
 def teamSelect(request):
 
+    REDIRECT_LINK_LEADER = "reroll"
+    REDIRECT_LINK_GUESSER = "guesser"
+
     if not GameState.is_game_init:
         GameState.init_words()
 
@@ -40,9 +43,9 @@ def teamSelect(request):
 
     if playerId != None:
         if GameState.redLeaderId == playerId or GameState.blueLeaderId == playerId:
-            return redirect("leader")
+            return redirect(REDIRECT_LINK_LEADER)
         elif GameState.redGuesserId == playerId or GameState.blueGuesserId == playerId:
-            return redirect("guesser")
+            return redirect(REDIRECT_LINK_GUESSER)
 
     if request.method == "POST":
 
@@ -59,22 +62,22 @@ def teamSelect(request):
                 if GameState.redLeaderId != None:
                     return render(request, 'game/teamSelect.html')
                 GameState.redLeaderId = generatedId
-                redirectLocation = "leader"
+                redirectLocation = REDIRECT_LINK_LEADER
             elif playerId == 1:
                 if GameState.redGuesserId != None:
                     return render(request, 'game/teamSelect.html')
                 GameState.redGuesserId = generatedId
-                redirectLocation = "guesser"
+                redirectLocation = REDIRECT_LINK_GUESSER
             elif playerId == 2:
                 if GameState.blueLeaderId != None:
                     return render(request, 'game/teamSelect.html')
                 GameState.blueLeaderId = generatedId
-                redirectLocation = "leader"
+                redirectLocation = REDIRECT_LINK_LEADER
             else:
                 if GameState.blueGuesserId != None:
                     return render(request, 'game/teamSelect.html')
                 GameState.blueGuesserId = generatedId
-                redirectLocation = "guesser"            
+                redirectLocation = REDIRECT_LINK_GUESSER        
         
             response = redirect(redirectLocation)
 

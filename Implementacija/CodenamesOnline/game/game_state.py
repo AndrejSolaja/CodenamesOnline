@@ -12,7 +12,7 @@ class GameState:
     blue_clues = []
     red_clues = []
 
-    turn = 2
+    turn = 0
     # 0 -> reroll Blue
     # 1 -> reroll Read
     # 2 -> Blue leader
