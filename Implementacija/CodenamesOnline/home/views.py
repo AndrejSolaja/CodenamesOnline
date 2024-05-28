@@ -9,6 +9,8 @@ from home.models import *
 
 from django.core.mail import send_mail
 from django.conf import settings
+from django.core.validators import validate_email
+from django.core.exceptions import ValidationError
 
 import string
 import secrets
@@ -71,6 +73,32 @@ def login_req(request):
                 else:
                     return redirect('home')
         else:
+            try:
+                username = form.cleaned_data['username']
+                password = form.cleaned_data['password']
+
+                try:
+                    validate_email(username)
+                    user = Korisnik.objects.filter(email=username).first()
+
+                    if user is not None:
+                        username = user.username
+                except ValidationError:
+                    pass                               
+
+                user = authenticate(username = username, password = password)
+
+                if user is not None:
+                    login(request,user)
+
+                    if user.is_superuser:
+                        return redirect('administrator/')
+                    else:
+                        return redirect('home')             
+
+            except:
+                pass
+
             context = {
                 'errorMessage': "Credentials are invalid.",
                 'form': form
