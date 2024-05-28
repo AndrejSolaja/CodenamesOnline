@@ -46,6 +46,13 @@ def players(request):
             json.dumps([getGamerTagById(GameState.redLeaderId), getGamerTagById(GameState.redGuesserId), getGamerTagById(GameState.blueLeaderId), getGamerTagById(GameState.blueGuesserId)]),
             content_type="application/json")
 
+def activeSet(request):    
+    activeSetReci = SetReci.objects.filter(active=True).first()
+    return HttpResponse(
+        json.dumps("DEFAULT SET" if activeSetReci is None else activeSetReci.naziv + " SET"),
+        content_type="application/json"
+    )
+
 # Create your views here.
 def teamSelect(request):
 

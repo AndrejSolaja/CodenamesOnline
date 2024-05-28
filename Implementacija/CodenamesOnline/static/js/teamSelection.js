@@ -40,6 +40,19 @@ function seek(){
             document.getElementById("igraci2").innerHTML = blueTeam
     }
     )
+
+    fetch('/game/activeSet', {
+        method: 'GET',
+        headers: {
+            'Accept': 'application/json',
+        },
+    })
+    .then(response => response.json())
+    .then(response => {
+        document.getElementById("setRed").innerHTML = response;
+        document.getElementById("setBlue").innerHTML = response;
+    }
+    )
 }
 
 seek()

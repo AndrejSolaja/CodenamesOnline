@@ -1,6 +1,6 @@
 
 from django.urls import path, include
-from game.views import teamSelect,guesser, leader, reroll, victory, players
+from game.views import teamSelect,guesser, leader, reroll, victory, players, activeSet
 
 urlpatterns = [
     path('', teamSelect, name='teamSelect'),
@@ -9,4 +9,5 @@ urlpatterns = [
     path('reroll', reroll, name='reroll'),
     path('victory', victory, name='victory'),
     path('players', players, name='players'),
+    path('activeSet', activeSet, name='activeSet'),
 ]
