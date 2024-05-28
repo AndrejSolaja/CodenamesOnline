@@ -8,6 +8,7 @@ class GameState:
     is_game_init = False
     clue = ""
     clue_num = 0
+    guess_in_row_cnt = 0
 
     blue_clues = []
     red_clues = []

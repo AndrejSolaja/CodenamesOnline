@@ -122,6 +122,14 @@ def victory(request):
 
 
 def guesser(request):
+
+    def end_turn():
+        if team == 'blue':
+            GameState.turn = 4
+        elif team == 'red':
+            GameState.turn = 2
+        GameState.guess_in_row_cnt = 0
+
     print(GameState.turn)
 
     if not GameState.is_game_init:
@@ -161,31 +169,29 @@ def guesser(request):
 
             if guessed_color == team:
                 GameState.guessed_count[team] += 1
+                GameState.guess_in_row_cnt += 1
                 # Ukoliko je poslednji pogodak kraj je igre
                 if GameState.guessed_count['blue'] == GameState.BLUE_CARD_NUM:
                     GameState.winnerTeam = 'blue'
                 elif GameState.guessed_count['red'] == GameState.RED_CARD_NUM:
                     GameState.winnerTeam = 'red'
-                # Moze ponovo guess posto je pogodio
+                # Moze ponovo guess posto je pogodio do maks clue_num + 1 puta
+                if GameState.guess_in_row_cnt == GameState.clue_num + 1:
+                    end_turn()
             elif guessed_color == "black":
                 # Kraj igre, tim koji je pogodio crnu gubi
                 if team == 'blue':
                     GameState.winnerTeam = 'red'
                 else:
                     GameState.winnerTeam = 'blue'
+                GameState.guess_in_row_cnt = 0
                 # Render ce se vrsiti u get metodi nakon sto se pozove reload
             else:
                 # Kraj poteza guessom na white
-                if team == 'blue':
-                    GameState.turn = 4
-                elif team == 'red':
-                    GameState.turn = 2
+                end_turn()
 
         elif action == 'end_guess':
-            if team == 'blue':
-                GameState.turn = 4
-            elif team == 'red':
-                GameState.turn = 2
+            end_turn()
 
         # Reload se radi nakon sto stigne response od post metode
         return HttpResponse(json.dumps({"done": True}))
