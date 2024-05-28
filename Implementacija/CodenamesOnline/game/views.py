@@ -1,4 +1,6 @@
 from django.shortcuts import render, get_object_or_404
+from urllib3 import request
+
 from game.game_state import GameState
 from game.forms import ClueForm, TeamSelect
 from home.models import *
@@ -137,26 +139,22 @@ def guesser(request):
             GameState.turn = 2
         GameState.guess_in_row_cnt = 0
 
-    print(GameState.turn)
+    #print(GameState.turn)
 
     if not GameState.is_game_init:
         GameState.init_words()
 
     # odredjivanje tima na osnovu requesta
-    if request.user.id == None:
-        if GameState.blueGuesserId == request.COOKIES['playerIdentifier']:
-            team = 'blue'
-        elif GameState.redGuesserId == request.COOKIES['playerIdentifier']:
-            team = 'red'
-        else:
-            return HttpResponseForbidden('You are not allowed inside this game.')
+    userID = getId(request)
+
+    if userID == None:
+        return HttpResponseForbidden('You are not allowed inside this game.')
+    elif GameState.blueGuesserId == userID:
+        team = 'blue'
+    elif GameState.redGuesserId == userID:
+        team = 'red'
     else:
-        if GameState.blueGuesserId == request.user.id:
-            team = 'blue'
-        elif GameState.redGuesserId == request.user.id:
-            team = 'red'
-        else:
-            return HttpResponseForbidden('You are not allowed inside this game.')
+        return HttpResponseForbidden('You are not allowed inside this game.')
 
     if request.method == "POST":
         data = json.loads(request.body.decode('utf-8'))  # dobija se indeks 1 do 25
@@ -216,6 +214,14 @@ def guesser(request):
         }
         return render(request, 'game/guesser.html', context)
     else:
+        # Update baze korisnika u zavisnosti od toga da li je pobedio ili ne
+        if request.user.id != None:
+            kor = Korisnik.objects.get(id=request.user.id)
+            if team == GameState.winnerTeam:
+                kor.broj_pobeda_guesser +=1
+            kor.broj_partija_guesser +=1
+            kor.save()
+
         return redirect('victory')
 
 
@@ -226,20 +232,16 @@ def leader(request):
         GameState.init_words()
 
     # odredjivanje tima na osnovu requesta
-    if request.user.id == None:
-        if GameState.blueLeaderId == request.COOKIES['playerIdentifier']:
-            team = 'blue'
-        elif GameState.redLeaderId == request.COOKIES['playerIdentifier']:
-            team = 'red'
-        else:
-            return HttpResponseForbidden('You are not allowed inside this game.')
+    userID = getId(request)
+
+    if userID == None:
+        return HttpResponseForbidden('You are not allowed inside this game.')
+    elif GameState.blueLeaderId == userID:
+        team = 'blue'
+    elif GameState.redLeaderId == userID:
+        team = 'red'
     else:
-        if GameState.blueLeaderId == request.user.id:
-            team = 'blue'
-        elif GameState.redLeaderId == request.user.id:
-            team = 'red'
-        else:
-            return HttpResponseForbidden('You are not allowed inside this game.')
+        return HttpResponseForbidden('You are not allowed inside this game.')
 
     myTurn = False
     if (GameState.turn == 2) and (team == 'blue'):
@@ -284,6 +286,13 @@ def leader(request):
         }
         return render(request, 'game/leader.html', context)
     else:
+        # Update baze korisnika u zavisnosti od toga da li je pobedio ili ne
+        if request.user.id != None:
+            kor = Korisnik.objects.get(id=request.user.id)
+            if team == GameState.winnerTeam:
+                kor.broj_pobeda_leader +=1
+            kor.broj_partija_leader +=1
+            kor.save()
         return redirect('victory')
 
 
@@ -292,20 +301,16 @@ def reroll(request):
         GameState.init_words()
 
     # odredjivanje tima na osnovu requesta
-    if request.user.id == None:
-        if GameState.blueLeaderId == request.COOKIES['playerIdentifier']:
-            team = 'blue'
-        elif GameState.redLeaderId == request.COOKIES['playerIdentifier']:
-            team = 'red'
-        else:
-            return HttpResponseForbidden('You are not allowed inside this game.')
+    userID = getId(request)
+
+    if userID == None:
+        return HttpResponseForbidden('You are not allowed inside this game.')
+    elif GameState.blueLeaderId == userID:
+        team = 'blue'
+    elif GameState.redLeaderId == userID:
+        team = 'red'
     else:
-        if GameState.blueLeaderId == request.user.id:
-            team = 'blue'
-        elif GameState.redLeaderId == request.user.id:
-            team = 'red'
-        else:
-            return HttpResponseForbidden('You are not allowed inside this game.')
+        return HttpResponseForbidden('You are not allowed inside this game.')
 
     # Logika koji igrac igra za default neka bude red
     specific_player_words = {}
