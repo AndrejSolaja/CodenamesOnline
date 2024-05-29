@@ -1,15 +1,20 @@
+# Andrej Šolaja 2021/0344
 from django.shortcuts import get_object_or_404
 from home.models import SetReci
 import random
 
 class GameState:
-    game_words = {}
+    # Key is word, value[0] is 'blue' or 'red', value[1] is 0 or 1 representing if word has been guessed.
+    game_words: dict[str, list[str, int]] = {}
+    # List of excess words to be used as potential rerolls.
     remaining_words = []
     is_game_init = False
     clue = ""
     clue_num = 0
+    # Counter used to limit guesser to specific number of guesses in 1 turn.
     guess_in_row_cnt = 0
 
+    # History of clues for displaying
     blue_clues = []
     red_clues = []
 
@@ -29,6 +34,7 @@ class GameState:
 
     winnerTeam = None
 
+    # Number of guessed words, used for win detection
     guessed_count = {'blue': 0, 'red': 0}
 
     BLUE_CARD_NUM = 9
@@ -37,7 +43,10 @@ class GameState:
     BLACK_CARD_NUM = 1
 
     @staticmethod
-    def init_words():
+    def init_words() -> None:
+        """
+            Takes active game set and assigns colors to each card and sets static fields for class.
+        """
         print("Initializing game words...")
         active_set = get_object_or_404(SetReci, active=True)
         words = list(active_set.reci.all())

@@ -1,3 +1,6 @@
+# Andrej Šolaja 2021/0344
+# Teodor Đelić 2021/0254
+# Đorđe Vuković 2021/0327
 from django.shortcuts import render, get_object_or_404
 from urllib3 import request
 
@@ -13,6 +16,18 @@ import uuid
 
 
 def generateId(request):
+    """
+        Generate a unique identifier for a user.
+
+        If the user is authenticated, return their user ID.
+        Otherwise, generate a new UUID4 and return its hexadecimal string representation.
+
+        Args:
+        request (HttpRequest): The request object containing user information.
+
+        Returns:
+        str: The user's ID if authenticated, otherwise a new UUID4 hex string.
+    """
     if request.user.is_authenticated:
         return request.user.id
 
@@ -20,6 +35,19 @@ def generateId(request):
 
 
 def getId(request):
+    """
+       Retrieve the unique identifier for a user from cookies or authentication.
+
+       If the user is authenticated, return their user ID.
+       If not authenticated but a 'playerIdentifier' cookie exists, return its value as a UUID hex string.
+       If neither, return None.
+
+       Args:
+       request (HttpRequest): The request object containing user and cookie information.
+
+       Returns:
+       str: The user's ID, the 'playerIdentifier' cookie as a UUID hex string, or None.
+       """
     if request.user.is_authenticated:
         return request.user.id
 
@@ -30,6 +58,20 @@ def getId(request):
 
 
 def getGamerTagById(playerId):
+    """
+       Retrieve a user's gamer tag (username) by their player ID.
+
+       If the player ID is None, return None.
+       Attempt to find a user with the given ID in the Korisnik model.
+       If no user is found or an exception occurs, return "Anonymous".
+       Otherwise, return the user's username.
+
+       Args:
+       playerId (str): The unique identifier of the player.
+
+       Returns:
+       str: The username associated with the player ID, or "Anonymous" if not found or an error occurs.
+    """
     if playerId is None:
         return None
     
@@ -43,7 +85,19 @@ def getGamerTagById(playerId):
     
     return user.username
 
-def players(request):        
+def players(request):
+    """
+       Retrieve and return the gamer tags of the players in the current game state.
+
+       Query the gamer tags for red and blue team leaders and guessers from the GameState model.
+       Return these gamer tags in a JSON response.
+
+       Args:
+       request (HttpRequest): The request object.
+
+       Returns:
+       HttpResponse: A JSON response containing the gamer tags of the red and blue team leaders and guessers.
+    """
     return HttpResponse(
             json.dumps([getGamerTagById(GameState.redLeaderId), getGamerTagById(GameState.redGuesserId), getGamerTagById(GameState.blueLeaderId), getGamerTagById(GameState.blueGuesserId)]),
             content_type="application/json")
@@ -57,6 +111,11 @@ def activeSet(request):
 
 # Create your views here.
 def teamSelect(request):
+    """
+    # TODO
+    :param request:
+    :return:
+    """
 
     REDIRECT_LINK_REROLL = "reroll"
     REDIRECT_LINK_LEADER = "leader"
@@ -124,6 +183,18 @@ def teamSelect(request):
 
 
 def victory(request):
+    """
+        Display a victory screen.
+
+        **Context**
+
+        ``teamWon``
+            'blue' or 'red' value
+
+        **Template:**
+
+        :template:`CodenamesOnline/templates/game/victory.html`
+        """
     context = {
         'teamWon': GameState.winnerTeam
     }
@@ -131,7 +202,20 @@ def victory(request):
 
 
 def guesser(request):
+    """
+            Display a screen for players in guesser roles where they can guess words using clue that is given.
 
+            **Context**
+
+            ``gamestate``
+                Overall game state.
+            ''MyTurn''
+                Boolean value used to disable buttons for players while it's not their turn
+
+            **Template:**
+
+            :template:`CodenamesOnline/templates/game/guesser.html`
+    """
     def end_turn():
         if team == 'blue':
             GameState.turn = 4
@@ -139,7 +223,6 @@ def guesser(request):
             GameState.turn = 2
         GameState.guess_in_row_cnt = 0
 
-    #print(GameState.turn)
 
     if not GameState.is_game_init:
         GameState.init_words()
@@ -226,6 +309,22 @@ def guesser(request):
 
 
 def leader(request):
+    """
+            Display a screen for players in leader roles where they can give clues.
+
+            **Context**
+
+            ``gamestate``
+                Overall game state.
+            ''MyTurn''
+                Boolean value used to disable buttons for players while it's not their turn
+            ''form''
+                Form for giving a clue to your teammate
+
+            **Template:**
+
+            :template:`CodenamesOnline/templates/game/leader.html`
+    """
     print(GameState.turn)
 
     if not GameState.is_game_init:
@@ -297,6 +396,22 @@ def leader(request):
 
 
 def reroll(request):
+    """
+                Display a screen for rerolling words, up to 3 words can be selected and changed.
+
+                **Context**
+
+                ``gamestate``
+                    Overall game state.
+                ''MyTurn''
+                    Boolean value used to disable buttons for players while it's not their turn
+                ''specific_player_words''
+                    List of words for specific player whose turn it is to reroll
+
+                **Template:**
+
+                :template:`CodenamesOnline/templates/game/reroll.html`
+        """
     if not GameState.is_game_init:
         GameState.init_words()
 

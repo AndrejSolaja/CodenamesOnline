@@ -1,13 +1,15 @@
+# Teodor Đelić 2021/0254
 from datetime import datetime
 from django.contrib.auth.forms import AuthenticationForm, UsernameField, UserCreationForm
 from django import forms
 from django.forms import ValidationError, Form
-
 from home.models import Korisnik
-
 from django.contrib.auth import get_user_model
 
 class PasswordRecoveryForm(Form):
+    """
+        # TODO
+    """
     def __init__(self, *args, **kwargs):
         super(PasswordRecoveryForm, self).__init__(*args, **kwargs)
     username = UsernameField(widget=forms.TextInput(
@@ -23,6 +25,9 @@ class PasswordRecoveryForm(Form):
         fields = ["username"]
 
 class KorisnikLoginForm(AuthenticationForm):
+    """
+        # TODO
+    """
     def __init__(self, *args, **kwargs):
         super(KorisnikLoginForm, self).__init__(*args, **kwargs)
 
@@ -45,6 +50,9 @@ class KorisnikLoginForm(AuthenticationForm):
     ))
 
 class KorisnikRegisterForm(UserCreationForm):
+    """
+        # TODO
+    """
     def __init__(self, *args, **kwargs):
         super(KorisnikRegisterForm, self).__init__(*args, **kwargs)
 

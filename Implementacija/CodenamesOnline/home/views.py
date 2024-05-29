@@ -1,21 +1,21 @@
+# Đorđe Vuković 2021/0327
+# Teodor Đelić 2021/0254
 from typing import LiteralString
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
-
 from home.forms import KorisnikRegisterForm, KorisnikLoginForm, PasswordRecoveryForm
-
 from home.models import *
-
 from django.core.mail import send_mail
 from django.conf import settings
+
 from django.core.validators import validate_email
 from django.core.exceptions import ValidationError
 
 import string
 import secrets
 
-# Create your views here.
+
 
 def home(request):
     """
