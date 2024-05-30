@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'administrator.apps.AdministratorConfig',
     'game.apps.GameConfig',
     'django.contrib.admindocs',
+    'django_extensions'
 ]
 
 MIDDLEWARE = [
@@ -148,3 +149,7 @@ EMAIL_HOST_PASSWORD = 'ezqz oglm sdjw jtya'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_USE_SSL = False
+
+# Graphviz plotting
+import os
+os.environ['PATH'] = os.pathsep + "C:\\Users\\Djole\\Documents\\ETF\\PSI\\Graphviz-11.0.0-win64\\bin"
