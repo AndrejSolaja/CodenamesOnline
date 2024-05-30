@@ -102,19 +102,29 @@ def players(request):
             json.dumps([getGamerTagById(GameState.redLeaderId), getGamerTagById(GameState.redGuesserId), getGamerTagById(GameState.blueLeaderId), getGamerTagById(GameState.blueGuesserId)]),
             content_type="application/json")
 
-def activeSet(request):    
+def activeSet(request):
+    """
+       Retrieve and return the active word set.
+
+       Args:
+       request (HttpRequest): The request object.
+
+       Returns:
+       HttpResponse: A JSON response containing the active word set name.
+    """
     activeSetReci = SetReci.objects.filter(active=True).first()
     return HttpResponse(
         json.dumps("DEFAULT SET" if activeSetReci is None else activeSetReci.naziv + " SET"),
         content_type="application/json"
     )
 
-# Create your views here.
 def teamSelect(request):
     """
-    # TODO
-    :param request:
-    :return:
+    Display the team select page, on which the user can choose his desired role.
+
+    **Template:**
+
+    :template:`game/teamSelect.html`
     """
 
     REDIRECT_LINK_REROLL = "reroll"
@@ -193,7 +203,7 @@ def victory(request):
 
         **Template:**
 
-        :template:`CodenamesOnline/templates/game/victory.html`
+        :template:`game/victory.html`
         """
     context = {
         'teamWon': GameState.winnerTeam
@@ -214,7 +224,7 @@ def guesser(request):
 
             **Template:**
 
-            :template:`CodenamesOnline/templates/game/guesser.html`
+            :template:`game/guesser.html`
     """
     def end_turn():
         if team == 'blue':
@@ -323,7 +333,7 @@ def leader(request):
 
             **Template:**
 
-            :template:`CodenamesOnline/templates/game/leader.html`
+            :template:`game/leader.html`
     """
     print(GameState.turn)
 
@@ -410,7 +420,7 @@ def reroll(request):
 
                 **Template:**
 
-                :template:`CodenamesOnline/templates/game/reroll.html`
+                :template:`game/reroll.html`
         """
     if not GameState.is_game_init:
         GameState.init_words()

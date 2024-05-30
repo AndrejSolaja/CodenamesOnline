@@ -24,11 +24,14 @@ def home(request):
 
     **Template:**
 
-    :template:`CodenamesOnline/templates/home/index.html`
+    :template:`home/index.html`
     """
     return render(request, 'home/index.html')
 
 def logout_req(request):
+    """
+    Logs out and redirects the user to homepage.
+    """
     logout(request)
     return redirect('home')
 
@@ -45,7 +48,7 @@ def login_req(request):
 
     **Template:**
 
-    :template:`CodenamesOnline/templates/home/login.html`
+    :template:`home/login.html`
     """
     if request.method == "POST":
 
@@ -136,7 +139,7 @@ def newset(request):
         Displays the name of the successfully created :model:`home.SetReci`
     **Template:**
 
-    :template:`CodenamesOnline/templates/home/newSet.html`
+    :template:`home/newSet.html`
     """
     if request.method=="POST":
         words = request.POST['words_input']
@@ -220,7 +223,7 @@ def profile(request):
 
     **Template:**
 
-    :template:`CodenamesOnline/templates/home/profile.html`
+    :template:`home/profile.html`
     """
     # dohvatanje ID korisnika
     korisnik = Korisnik.objects.filter(username=request.user.username).first()
@@ -277,7 +280,7 @@ def recovery(request):
 
     **Template:**
 
-    :template:`CodenamesOnline/templates/home/recovery.html`
+    :template:`home/recovery.html`
     """
     if request.method == "POST":
 
@@ -322,7 +325,7 @@ def register(request):
 
     **Template:**
 
-    :template:`CodenamesOnline/templates/home/register.html`
+    :template:`home/register.html`
     """
     if request.method=="POST":
         form = KorisnikRegisterForm(request.POST)
@@ -353,4 +356,11 @@ def register(request):
         return render(request, 'home/register.html', context)
 
 def rules(request):
+    """
+    Display a page explaining rules.
+
+    **Template:**
+
+    :template:`home/rules.html`
+    """
     return render(request, 'home/rules.html')

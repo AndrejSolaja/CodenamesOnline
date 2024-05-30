@@ -18,7 +18,7 @@ def adminPage(request):
 
     **Template:**
 
-    :template:`CodenamesOnline/templates/administrator/adminPage.html`
+    :template:`administrator/adminPage.html`
     """
     sets = SetReci.objects.all()
     activeSet = SetReci.objects.filter(active=True).first()
@@ -62,7 +62,7 @@ def adminSetEditor(request, set_id):
 
     **Template:**
 
-    :template:`CodenamesOnline/templates/administrator/adminPageEditor.html`
+    :template:`administrator/adminPageEditor.html`
     """
     if request.method == 'POST':
         if 'activate_set' in request.POST: #request.POST['activate_set'][0] == 'ACTIVATE'
