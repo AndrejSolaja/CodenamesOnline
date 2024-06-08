@@ -1,0 +1,190 @@
+{
+  "id": "8a53c19c-9551-4171-8772-985eb8eb16ef",
+  "version": "2.0",
+  "name": "SSU - Pogadjanje pojma",
+  "url": "http://127.0.0.1:8000/game/guesser",
+  "tests": [{
+    "id": "159655e1-cab3-42a4-bd6f-7cabc72b0744",
+    "name": "Korisnik uspesno pogadja pojam i prekida svoj potez",
+    "commands": [{
+      "id": "843784af-ec91-4850-b3a2-2dd338f4e954",
+      "comment": "",
+      "command": "open",
+      "target": "http://127.0.0.1:8000/game/guesser",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "36d93236-3732-4f59-a618-d95c29ea8ee2",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "2099x1438",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "5649f926-9052-40b6-acd4-92a6c8319fd4",
+      "comment": "",
+      "command": "click",
+      "target": "css=h1",
+      "targets": [
+        ["css=h1", "css:finder"],
+        ["xpath=//div[@id='guesser-wrapper']/div/div[2]/div/div/div/h1", "xpath:idRelative"],
+        ["xpath=//h1", "xpath:position"],
+        ["xpath=//h1[contains(.,'CLUE: else 1')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "4ce7c258-2e02-4201-9980-bd8b0ed65a76",
+      "comment": "",
+      "command": "click",
+      "target": "id=box2",
+      "targets": [
+        ["id=box2", "id"],
+        ["css=#box2", "css:finder"],
+        ["xpath=//div[@id='box2']", "xpath:attributes"],
+        ["xpath=//div[@id='guesser-wrapper']/div/div[2]/div/div[2]/div/div/table/tbody/tr/td[2]/div", "xpath:idRelative"],
+        ["xpath=//td[2]/div", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "4e719554-b53c-48c1-8a29-5c678825b930",
+      "comment": "",
+      "command": "click",
+      "target": "css=.col:nth-child(1) > .btn",
+      "targets": [
+        ["css=.col:nth-child(1) > .btn", "css:finder"],
+        ["xpath=//button[@type='submit']", "xpath:attributes"],
+        ["xpath=//div[@id='guesser-wrapper']/div/div[2]/div/div[3]/div/div/button", "xpath:idRelative"],
+        ["xpath=//button", "xpath:position"],
+        ["xpath=//button[contains(.,'GUESS')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "1aa8c900-bf1c-4d48-a10b-e3b58f2d1bae",
+      "comment": "",
+      "command": "click",
+      "target": "css=.col:nth-child(2) > .btn",
+      "targets": [
+        ["css=.col:nth-child(2) > .btn", "css:finder"],
+        ["xpath=(//button[@type='submit'])[2]", "xpath:attributes"],
+        ["xpath=//div[@id='guesser-wrapper']/div/div[2]/div/div[3]/div/div[2]/button", "xpath:idRelative"],
+        ["xpath=//div[2]/button", "xpath:position"],
+        ["xpath=//button[contains(.,'End Turn')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "770c82da-eb18-4a00-becd-abce99166db5",
+      "comment": "",
+      "command": "click",
+      "target": "id=home-body",
+      "targets": [
+        ["id=home-body", "id"],
+        ["css=#home-body", "css:finder"],
+        ["xpath=//body[@id='home-body']", "xpath:attributes"],
+        ["xpath=//body", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "cb2540c6-4bae-46ab-af92-7870b7e2cd13",
+      "comment": "",
+      "command": "verifyNotEditable",
+      "target": "css=.col:nth-child(2) > .btn",
+      "targets": [
+        ["css=.col:nth-child(2)", "css:finder"],
+        ["xpath=//div[@id='guesser-wrapper']/div/div[2]/div/div[3]/div/div[2]", "xpath:idRelative"],
+        ["xpath=//div/div[3]/div/div[2]", "xpath:position"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "6b948f58-c629-4a43-82f5-af5e956c778f",
+    "name": "Korisnik pogadja pogresnu rec",
+    "commands": [{
+      "id": "dca0f3d8-d06b-490f-9f41-6686b9ad581d",
+      "comment": "",
+      "command": "open",
+      "target": "http://127.0.0.1:8000/game/guesser",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "f00c9d3b-1749-491c-838f-fc7d2e571f91",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1339x1438",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "465ce2dd-0869-4f51-bd6c-d98e6e76c34f",
+      "comment": "",
+      "command": "click",
+      "target": "id=box8",
+      "targets": [
+        ["id=box8", "id"],
+        ["css=#box8", "css:finder"],
+        ["xpath=//div[@id='box8']", "xpath:attributes"],
+        ["xpath=//div[@id='guesser-wrapper']/div/div[2]/div/div[2]/div/div/table/tbody/tr[2]/td[3]/div", "xpath:idRelative"],
+        ["xpath=//tr[2]/td[3]/div", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "596eef4f-9f59-4f59-8d60-d81e858db868",
+      "comment": "",
+      "command": "click",
+      "target": "css=.col:nth-child(1) > .btn",
+      "targets": [
+        ["css=.col:nth-child(1) > .btn", "css:finder"],
+        ["xpath=//button[@type='submit']", "xpath:attributes"],
+        ["xpath=//div[@id='guesser-wrapper']/div/div[2]/div/div[3]/div/div/button", "xpath:idRelative"],
+        ["xpath=//button", "xpath:position"],
+        ["xpath=//button[contains(.,'GUESS')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "338ea7ef-a2f3-4962-99b9-d3e5ee10e6f0",
+      "comment": "",
+      "command": "verifyNotEditable",
+      "target": "css=.col:nth-child(2) > .btn",
+      "targets": [],
+      "value": ""
+    }]
+  }, {
+    "id": "c195478a-97f6-4fc2-a408-731177127534",
+    "name": "Korisnik pogadjanja poslednju rec i pobedjuje",
+    "commands": [{
+      "id": "ef89e0ae-3ebc-4af4-93a7-259339adda0e",
+      "comment": "",
+      "command": "open",
+      "target": "http://127.0.0.1:8000/game/guesser",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "52540518-ffe6-4c93-b9b9-feace9a8bb9d",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "2099x1438",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "b31919a9-6166-43a9-80d0-418daea6c424",
+      "comment": "Check if Blue team wins (pretpostavka da je igrac test iz plavog tima)",
+      "command": "assertText",
+      "target": "css=span:nth-child(1)",
+      "targets": [
+        ["css=span:nth-child(1)", "css:finder"],
+        ["xpath=//div[@id='victory-area']/div/div/span", "xpath:idRelative"],
+        ["xpath=//div/div/div/span", "xpath:position"],
+        ["xpath=//span[contains(.,'Blue')]", "xpath:innerText"]
+      ],
+      "value": "Blue"
+    }]
+  }],
+  "suites": [{
+    "id": "985889c2-3d4d-43c1-8b81-72943cd71446",
+    "name": "Default Suite",
+    "persistSession": false,
+    "parallel": false,
+    "timeout": 300,
+    "tests": []
+  }],
+  "urls": ["http://127.0.0.1:8000/game/guesser"],
+  "plugins": []
+}

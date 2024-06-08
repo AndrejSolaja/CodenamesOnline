@@ -4,3 +4,4 @@ docutils==0.21.2
 urllib3==2.2.1
 django-extensions==3.2.3
 pydotplus==2.0.2
+selenium==4.21.0

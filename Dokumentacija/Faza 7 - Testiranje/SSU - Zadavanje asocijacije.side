@@ -1,0 +1,96 @@
+{
+  "id": "8e27776b-5ef0-4efc-a5b9-f2212f7fc7a6",
+  "version": "2.0",
+  "name": "SSU - Zadavanje asocijacije",
+  "url": "http://127.0.0.1:8000",
+  "tests": [{
+    "id": "75a40aa5-9d85-41a8-a75f-3a6a718b9eb1",
+    "name": "Uspesno zadavanje asocijacije",
+    "commands": [{
+      "id": "03caac2d-a18f-4880-94bd-6eff5f66a13b",
+      "comment": "",
+      "command": "open",
+      "target": "/game/leader",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "fe177b18-63dc-43c9-b441-908d225de556",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "2113x1439",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "7752520d-6c73-4173-b91a-458641e3546a",
+      "comment": "",
+      "command": "click",
+      "target": "id=id_clue",
+      "targets": [
+        ["id=id_clue", "id"],
+        ["name=clue", "name"],
+        ["css=#id_clue", "css:finder"],
+        ["xpath=//input[@id='id_clue']", "xpath:attributes"],
+        ["xpath=//div[@id='leader-game-area']/div[3]/form/div/div[2]/input", "xpath:idRelative"],
+        ["xpath=//div[2]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "641581cb-c61c-44cc-9e21-8ea11171fcb2",
+      "comment": "",
+      "command": "type",
+      "target": "id=id_clue",
+      "targets": [
+        ["id=id_clue", "id"],
+        ["name=clue", "name"],
+        ["css=#id_clue", "css:finder"],
+        ["xpath=//input[@id='id_clue']", "xpath:attributes"],
+        ["xpath=//div[@id='leader-game-area']/div[3]/form/div/div[2]/input", "xpath:idRelative"],
+        ["xpath=//div[2]/input", "xpath:position"]
+      ],
+      "value": "dog"
+    }, {
+      "id": "c693e544-7d39-4349-9c0d-fe3610e5acdb",
+      "comment": "",
+      "command": "type",
+      "target": "id=id_clue_num",
+      "targets": [
+        ["id=id_clue_num", "id"],
+        ["name=clue_num", "name"],
+        ["css=#id_clue_num", "css:finder"],
+        ["xpath=//input[@id='id_clue_num']", "xpath:attributes"],
+        ["xpath=//div[@id='leader-game-area']/div[3]/form/div/div[4]/input", "xpath:idRelative"],
+        ["xpath=//div[4]/input", "xpath:position"]
+      ],
+      "value": "2"
+    }, {
+      "id": "d84e6839-c3ee-430f-ab11-3d6fdc356e64",
+      "comment": "",
+      "command": "click",
+      "target": "css=.btn",
+      "targets": [
+        ["css=.btn", "css:finder"],
+        ["xpath=//input[@type='submit']", "xpath:attributes"],
+        ["xpath=//div[@id='leader-game-area']/div[3]/form/div/div[5]/input", "xpath:idRelative"],
+        ["xpath=//div[5]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "be609aed-6b93-479e-b750-f47ef0899230",
+      "comment": "",
+      "command": "verifyNotEditable",
+      "target": "css=.btn",
+      "targets": [],
+      "value": ""
+    }]
+  }],
+  "suites": [{
+    "id": "5bbcd015-fa0d-4703-8849-8788fb30b73b",
+    "name": "Default Suite",
+    "persistSession": false,
+    "parallel": false,
+    "timeout": 300,
+    "tests": ["75a40aa5-9d85-41a8-a75f-3a6a718b9eb1"]
+  }],
+  "urls": ["http://127.0.0.1:8000/"],
+  "plugins": []
+}

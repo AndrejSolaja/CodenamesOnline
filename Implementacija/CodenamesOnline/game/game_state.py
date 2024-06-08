@@ -88,8 +88,8 @@ class GameState:
 
         GameState.remaining_words = word_groups[4]
 
-        print("before", GameState.is_game_init)
+        # print("before", GameState.is_game_init)
         GameState.is_game_init = True
-        print("after", GameState.is_game_init)
+        # print("after", GameState.is_game_init)
 
-        print(GameState.game_words)
+        # print(GameState.game_words)

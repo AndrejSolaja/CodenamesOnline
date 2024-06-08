@@ -1,0 +1,140 @@
+{
+  "id": "e2cecdee-abd1-4b94-b74e-79ddc90bf895",
+  "version": "2.0",
+  "name": "SSU - Re-roll reci",
+  "url": "http://127.0.0.1:8000",
+  "tests": [{
+    "id": "b8cdb68c-b8fa-412f-8f49-f3885fbdd903",
+    "name": "Uspesno rerrolovanje vise reci, max select 3",
+    "commands": [{
+      "id": "712cbb62-1f4e-4e43-a6da-a8817e8be0e4",
+      "comment": "",
+      "command": "open",
+      "target": "/game/reroll",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "76308dd2-527c-4598-9877-8c930a05155a",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "2113x1439",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "e8898b95-ae0a-487c-bc90-15209cf16649",
+      "comment": "",
+      "command": "click",
+      "target": "id=box2",
+      "targets": [
+        ["id=box2", "id"],
+        ["css=#box2", "css:finder"],
+        ["xpath=//div[@id='box2']", "xpath:attributes"],
+        ["xpath=//div[@id='reroll-game-area']/div[2]/div/div/table/tbody/tr/td[2]/div", "xpath:idRelative"],
+        ["xpath=//td[2]/div", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "3ec91103-38fa-4fd3-955f-6a99471fcf63",
+      "comment": "",
+      "command": "click",
+      "target": "id=box3",
+      "targets": [
+        ["id=box3", "id"],
+        ["css=#box3", "css:finder"],
+        ["xpath=//div[@id='box3']", "xpath:attributes"],
+        ["xpath=//div[@id='reroll-game-area']/div[2]/div/div/table/tbody/tr/td[3]/div", "xpath:idRelative"],
+        ["xpath=//td[3]/div", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "c11c9cb7-60c2-4e98-97c0-814daa3a65da",
+      "comment": "",
+      "command": "click",
+      "target": "id=box4",
+      "targets": [
+        ["id=box4", "id"],
+        ["css=#box4", "css:finder"],
+        ["xpath=//div[@id='box4']", "xpath:attributes"],
+        ["xpath=//div[@id='reroll-game-area']/div[2]/div/div/table/tbody/tr/td[4]/div", "xpath:idRelative"],
+        ["xpath=//td[4]/div", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "3587e539-5321-48da-82bd-a75eb7472e5e",
+      "comment": "",
+      "command": "click",
+      "target": "id=box9",
+      "targets": [
+        ["id=box9", "id"],
+        ["css=#box9", "css:finder"],
+        ["xpath=//div[@id='box9']", "xpath:attributes"],
+        ["xpath=//div[@id='reroll-game-area']/div[2]/div/div/table/tbody/tr[2]/td[4]/div", "xpath:idRelative"],
+        ["xpath=//tr[2]/td[4]/div", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "83911aa2-c524-4b18-afc7-79bb2b1fd0bd",
+      "comment": "",
+      "command": "click",
+      "target": "id=box8",
+      "targets": [
+        ["id=box8", "id"],
+        ["css=#box8", "css:finder"],
+        ["xpath=//div[@id='box8']", "xpath:attributes"],
+        ["xpath=//div[@id='reroll-game-area']/div[2]/div/div/table/tbody/tr[2]/td[3]/div", "xpath:idRelative"],
+        ["xpath=//tr[2]/td[3]/div", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "289fdd8e-3647-4568-8e67-59e9f44087b2",
+      "comment": "",
+      "command": "click",
+      "target": "id=box4",
+      "targets": [
+        ["id=box4", "id"],
+        ["css=#box4", "css:finder"],
+        ["xpath=//div[@id='box4']", "xpath:attributes"],
+        ["xpath=//div[@id='reroll-game-area']/div[2]/div/div/table/tbody/tr/td[4]/div", "xpath:idRelative"],
+        ["xpath=//td[4]/div", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "8158f8e5-bd92-4d28-a181-b954144a71f9",
+      "comment": "",
+      "command": "click",
+      "target": "id=box5",
+      "targets": [
+        ["id=box5", "id"],
+        ["css=#box5", "css:finder"],
+        ["xpath=//div[@id='box5']", "xpath:attributes"],
+        ["xpath=//div[@id='reroll-game-area']/div[2]/div/div/table/tbody/tr/td[5]/div", "xpath:idRelative"],
+        ["xpath=//td[5]/div", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "6dacbb8a-bf4d-4d9c-be05-c20c9e3350c4",
+      "comment": "",
+      "command": "click",
+      "target": "id=re-roll-submit-button",
+      "targets": [
+        ["id=re-roll-submit-button", "id"],
+        ["css=#re-roll-submit-button", "css:finder"],
+        ["xpath=//button[@id='re-roll-submit-button']", "xpath:attributes"],
+        ["xpath=//div[@id='reroll-game-area']/div[3]/div/div/button", "xpath:idRelative"],
+        ["xpath=//button", "xpath:position"],
+        ["xpath=//button[contains(.,'Re-roll')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }]
+  }],
+  "suites": [{
+    "id": "0f12f7db-8d87-4069-a8ca-3044f8db6687",
+    "name": "Default Suite",
+    "persistSession": false,
+    "parallel": false,
+    "timeout": 300,
+    "tests": ["b8cdb68c-b8fa-412f-8f49-f3885fbdd903"]
+  }],
+  "urls": ["http://127.0.0.1:8000/"],
+  "plugins": []
+}
