@@ -152,7 +152,8 @@ class TestViews(TestCase):
 class FunctionalTestCase(StaticLiveServerTestCase):
 
     def setUp(self):
-        service = webdriver.ChromeService(executable_path='C:\\Users\\Djole\\Documents\\ETF\\PSI\\project_Imposters_Inc\\Implementacija\\CodenamesOnline\\chromedriver.exe')
+        service = webdriver.ChromeService(executable_path='C:\\Users\\andre\\Desktop\\PSI\\MainProjekat\\project_Imposters_Inc\\Implementacija\\CodenamesOnline\\chromedriver.exe')
+        # service = webdriver.ChromeService(executable_path='C:\\Users\\Djole\\Documents\\ETF\\PSI\\project_Imposters_Inc\\Implementacija\\CodenamesOnline\\chromedriver.exe')
         self.browser = webdriver.Chrome(service = service)
         self.appUrl = self.live_server_url + "/game"
 

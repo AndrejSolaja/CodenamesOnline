@@ -1,0 +1,70 @@
+{
+  "id": "bb57fd33-6c96-4673-a2b9-afddb6699e28",
+  "version": "2.0",
+  "name": "PSITesitranje",
+  "url": "http://127.0.0.1:8000/",
+  "tests": [{
+    "id": "293a0fec-076a-4917-8732-6737774a8e55",
+    "name": "Korisnik cita pravila igre",
+    "commands": [{
+      "id": "6c9063ca-7d2f-4ddc-8e83-95bc9139c36e",
+      "comment": "",
+      "command": "open",
+      "target": "http://127.0.0.1:8000/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "3e820c0f-4a25-4512-9dba-ea2033dbeb49",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1002x927",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "d7606858-b6e3-42db-9685-0a32d7989976",
+      "comment": "",
+      "command": "click",
+      "target": "css=.bg-info",
+      "targets": [
+        ["css=.bg-info", "css:finder"],
+        ["xpath=//body[@id='home-body']/header/nav/ul/li[2]/a", "xpath:idRelative"],
+        ["xpath=//a[contains(@href, '/rules')]", "xpath:href"],
+        ["xpath=//li[2]/a", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "e4e037f1-98f4-4d8a-af70-5ee826946e12",
+      "comment": "",
+      "command": "click",
+      "target": "css=.card:nth-child(1)",
+      "targets": [
+        ["css=.card:nth-child(1)", "css:finder"],
+        ["xpath=//body[@id='home-body']/main/div", "xpath:idRelative"],
+        ["xpath=//div", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "ed5dbcdf-f6f7-4f13-a140-ca9af84829a3",
+      "comment": "",
+      "command": "assertText",
+      "target": "css=.card:nth-child(1) > h1",
+      "targets": [
+        ["css=.card:nth-child(1) > h1", "css:finder"],
+        ["xpath=//body[@id='home-body']/main/div/h1", "xpath:idRelative"],
+        ["xpath=//h1", "xpath:position"],
+        ["xpath=//h1[contains(.,'Codenames')]", "xpath:innerText"]
+      ],
+      "value": "Codenames"
+    }]
+  }],
+  "suites": [{
+    "id": "df6a74af-07ec-4291-abce-a18becbff72f",
+    "name": "Default Suite",
+    "persistSession": false,
+    "parallel": false,
+    "timeout": 300,
+    "tests": []
+  }],
+  "urls": ["http://127.0.0.1:8000/"],
+  "plugins": []
+}
